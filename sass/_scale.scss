@@ -1,0 +1,126 @@
+// Scales
+// ======
+
+@import "compass/typography/vertical_rhythm";
+
+$ratio-options: (
+  linear            : linear,
+  octave            : 2,
+  major-seventh     : 15/8,
+  minor-seventh     : 16/9,
+  major-sixth       : 5/3,
+  minor-sixth       : 8/5,
+  fifth             : 3/2,
+  augmented-fourth  : 45/32,
+  fourth            : 4/3,
+  major-third       : 5/4,
+  minor-third       : 6/5,
+  major-second      : 9/8,
+  minor-second      : 16/15,
+);
+
+$base-size: $base-font-size !default;
+$ratio: fifth !default;
+
+
+// Sizes
+// -----
+$sizes: (
+  normal: 0,
+  rhythm: 1,
+
+  h1: 4,
+  h2: 3,
+  h3: 2,
+
+  small: -1,
+
+  gutter: rhythm,
+  column: 4,
+  shim: -2,
+
+  corners: shim,
+);
+
+
+// Get Size
+// --------
+@function _get-size(
+  $size
+) {
+  $size: map-get($sizes, $size) or $size;
+
+  @if map-has-key($sizes, $size) {
+    $size: _get-size($size);
+  }
+
+  @return $size;
+}
+
+
+// Get Ratio
+// ---------
+@function _get-ratio(
+  $ratio: $ratio
+) {
+  $ratio: map-get($ratio-options, $ratio) or $ratio;
+
+  @if map-has-key($ratio-options, $ratio) {
+    $ratio: _get-ratio($ratio);
+  }
+
+  @return $ratio;
+}
+
+
+// Size
+// ----
+@function size(
+  $size,
+  $unit: $rhythm-unit
+) {
+  $size: _get-size($size);
+
+  @if type-of($size) == number {
+    @if unitless($size) {
+      $_ratio: _get-ratio($ratio);
+      $size: round($base-size * pow($_ratio, $size));
+    }
+
+    $size: convert-length($size, $unit);
+  }
+
+  @return $size;
+}
+
+
+// Get Font Size
+// -------------
+@function get-font-size(
+  $size: normal,
+  $lines: false
+) {
+  @return (
+    font-size: size($size),
+    line-height: rhythm($lines or lines-for-font-size(size($size, px))),
+  );
+}
+
+
+// Font Size
+// ---------
+@mixin font-size(
+  $size: normal,
+  $lines: false
+){
+  @include render(get-font-size($size, $lines));
+}
+
+
+// Square
+// ------
+
+@mixin square($size) {
+  height: size($size);
+  width: size($size);
+}
