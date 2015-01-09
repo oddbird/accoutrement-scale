@@ -1,0 +1,15 @@
+// Math Helpers
+// ============
+
+@function pow(
+  $number,
+  $exponent
+) {
+  $_return: 1;
+
+  @for $i from 1 through $exponent {
+    $_return: $_return * $number;
+  }
+
+  @return $_return;
+}

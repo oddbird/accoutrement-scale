@@ -1,0 +1,124 @@
+// Scale Tests
+// ===========
+
+
+// [private] Get Size
+// ------------------
+@include test-module('_get-size [function]') {
+  @include test('Access named sizes') {
+    $test: _get-size(normal);
+    $expect: 0;
+    @include assert-equal($test, $expect,
+      'Returns a size or scale-position based on keyword.');
+  }
+}
+
+
+// [private] Get Ratio
+// -------------------
+@include test-module('_get-ratio [function]') {
+  @include test('Access named ratio') {
+    $test: _get-ratio(fifth);
+    $expect: 3/2;
+    @include assert-equal($test, $expect,
+      'Returns a ratio based on keyword.');
+  }
+}
+
+
+// Size
+// ----
+@include test-module('size [function]') {
+  @include test('Get size from map setting') {
+    $test: size(gutter);
+    $expect: 1.5rem;
+    @include assert-equal($test, $expect,
+      'Returns named size from $sizes map.');
+  }
+
+  @include test('Get size from multiplier') {
+    $test: size(1);
+    $expect: 1.5rem;
+    @include assert-equal($test, $expect,
+      'Returns size calculated from multiplier.');
+  }
+
+  @include test('Get size from multiplier') {
+    $test: size(24px, rem);
+    $expect: 1.5rem;
+    @include assert-equal($test, $expect,
+      'Returns size converted from explicit length.');
+  }
+}
+
+
+// [private] Get Lines
+// -------------------
+@include test-module('_get-lines [function]') {
+  @include test('Calculate lines from named size') {
+    $test: _get-lines(h1);
+    $expect: 3.5;
+    @include assert-equal($test, $expect,
+      'Returns the number of lines needed for a named font size.');
+  }
+
+  @include test('Calculate lines from explicit length') {
+    $test: _get-lines(30px);
+    $expect: 1.5;
+    @include assert-equal($test, $expect,
+      'Returns the number of lines needed for an explicit font size.');
+  }
+
+  @include test('Add half-lines when spacing is too tight') {
+    $test: _get-lines(36px);
+    $expect: 2;
+    @include assert-equal($test, $expect,
+      'Returns extra space for tight line-heights.');
+  }
+}
+
+
+// Font Size [mixin]
+// -----------------
+@include test-module('font-size [mixin]') {
+  @include test('Set font-size and line-height') {
+    @include assert('Output sizes based on named scale') {
+      @include input {
+        @include font-size(h1);
+      }
+
+      @include expect {
+        font-size: 5.0625rem;
+        line-height: 5.25rem;
+      }
+    }
+
+    @include assert('Output sizes based on explicit lines') {
+      @include input {
+        @include font-size(24px, 3);
+      }
+
+      @include expect {
+        font-size: 1.5rem;
+        line-height: 4.5rem;
+      }
+    }
+  }
+}
+
+// Square [mixin]
+// --------------
+@include test-module('square [mixin]') {
+  @include test('Set height and width') {
+    @include assert('Output height/width based on keyword') {
+      @include input {
+        @include square(h1);
+      }
+
+      @include expect {
+        height: 5.0625rem;
+        width: 5.0625rem;
+      }
+    }
+  }
+}

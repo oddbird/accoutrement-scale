@@ -1,0 +1,14 @@
+// Math Tests
+// ==========
+
+// POW
+// ---
+@include test-module('pow [function]') {
+  @include test('Calculates exponential math') {
+    @include assert-equal(pow(6, 1), 6,
+      'Returns a number directly if the exponent is 1.');
+
+    @include assert-equal(pow(6, 6), 46656,
+      'Returns an exponential calculation.');
+  }
+}

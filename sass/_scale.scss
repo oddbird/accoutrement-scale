@@ -1,46 +1,8 @@
 // Scales
 // ======
 
-@import "compass/typography/vertical_rhythm";
-
-$ratio-options: (
-  linear            : linear,
-  octave            : 2,
-  major-seventh     : 15/8,
-  minor-seventh     : 16/9,
-  major-sixth       : 5/3,
-  minor-sixth       : 8/5,
-  fifth             : 3/2,
-  augmented-fourth  : 45/32,
-  fourth            : 4/3,
-  major-third       : 5/4,
-  minor-third       : 6/5,
-  major-second      : 9/8,
-  minor-second      : 16/15,
-);
-
-$base-size: $base-font-size !default;
-$ratio: fifth !default;
-
-
-// Sizes
-// -----
-$sizes: (
-  normal: 0,
-  rhythm: 1,
-
-  h1: 4,
-  h2: 3,
-  h3: 2,
-
-  small: -1,
-
-  gutter: rhythm,
-  column: 4,
-  shim: -2,
-
-  corners: shim,
-);
+@import 'units';
+@import 'math';
 
 
 // Get Size
@@ -63,9 +25,9 @@ $sizes: (
 @function _get-ratio(
   $ratio: $ratio
 ) {
-  $ratio: map-get($ratio-options, $ratio) or $ratio;
+  $ratio: map-get($_ratio-options, $ratio) or $ratio;
 
-  @if map-has-key($ratio-options, $ratio) {
+  @if map-has-key($_ratio-options, $ratio) {
     $ratio: _get-ratio($ratio);
   }
 
@@ -84,7 +46,11 @@ $sizes: (
   @if type-of($size) == number {
     @if unitless($size) {
       $_ratio: _get-ratio($ratio);
-      $size: round($base-size * pow($_ratio, $size));
+      @if $_ratio == 'linear' {
+        $size: $base-size * $size;
+      } @else {
+        $size: round($base-size * pow($_ratio, $size));
+      }
     }
 
     $size: convert-length($size, $unit);
@@ -94,16 +60,23 @@ $sizes: (
 }
 
 
-// Get Font Size
-// -------------
-@function get-font-size(
+// Get Lines
+// ---------
+@function _get-lines(
   $size: normal,
-  $lines: false
+  $rhythm: rhythm
 ) {
-  @return (
-    font-size: size($size),
-    line-height: rhythm($lines or lines-for-font-size(size($size, px))),
-  );
+  $font-size: size($size, px);
+  $line-height: size($rhythm, px);
+
+  $lines: ceil(2 * $font-size / $line-height) / 2;
+
+  // If lines are cramped include some extra lead.
+  @if ($lines * $line-height - $font-size) < 2px {
+    $lines: $lines + .5;
+  }
+
+  @return $lines;
 }
 
 
@@ -112,15 +85,17 @@ $sizes: (
 @mixin font-size(
   $size: normal,
   $lines: false
-){
-  @include render(get-font-size($size, $lines));
+) {
+  font-size: size($size);
+  line-height: if($lines, $lines, _get-lines($size)) * size(rhythm);
 }
 
 
 // Square
 // ------
-
 @mixin square($size) {
-  height: size($size);
-  width: size($size);
+  $size: size($size);
+
+  height: $size;
+  width: $size;
 }
