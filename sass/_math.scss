@@ -7,8 +7,12 @@
 ) {
   $_return: 1;
 
-  @for $i from 1 through $exponent {
+  @for $i from 1 through abs($exponent) {
     $_return: $_return * $number;
+  }
+
+  @if $exponent < 0 {
+    $_return: 1 / $_return;
   }
 
   @return $_return;

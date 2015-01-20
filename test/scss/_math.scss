@@ -11,4 +11,9 @@
     @include assert-equal(pow(6, 6), 46656,
       'Returns an exponential calculation.');
   }
+
+  @include test('Calculates negative exponents') {
+    @include assert-equal(pow(10, -1), .1,
+      'Returns a negative exponential calculation.');
+  }
 }

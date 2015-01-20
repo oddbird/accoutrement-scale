@@ -43,7 +43,18 @@
       'Returns size calculated from multiplier.');
   }
 
-  @include test('Get size from multiplier') {
+  @include test('Get size from negative multiplier') {
+    $ratio: octave !global;
+
+    $test: size(-1);
+    $expect: 0.5rem;
+    @include assert-equal($test, $expect,
+      'Returns size calculated from multiplier.');
+
+    $ratio: fifth !global;
+  }
+
+  @include test('Get unit-adjusted size') {
     $test: size(24px, rem);
     $expect: 1.5rem;
     @include assert-equal($test, $expect,
@@ -118,6 +129,21 @@
       @include expect {
         height: 5.0625rem;
         width: 5.0625rem;
+      }
+    }
+  }
+}
+
+@include test-module('baseline [mixin]') {
+  @include test('Set initial font-size and line-height') {
+    @include assert('Output relative initial font-size and line-height') {
+      @include input {
+        @include baseline;
+      }
+
+      @include expect {
+        font-size: 100%;
+        line-height: 1.5em;
       }
     }
   }
