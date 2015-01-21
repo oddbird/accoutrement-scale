@@ -1,6 +1,6 @@
 {
   "name": "accoutrement-scale",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "https://github.com/oddbird/accoutrement-scale",
   "authors": [
     "Eric M. Suzanne"
@@ -11,7 +11,7 @@
     "sass/_math.scss",
     "sass/_scale.config.scss",
     "sass/_units.scss"
-    ],
+  ],
   "keywords": [
     "sass",
     "css",
