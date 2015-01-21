@@ -69,14 +69,7 @@
   $font-size: size($size, px);
   $line-height: size($rhythm, px);
 
-  $lines: ceil(2 * $font-size / $line-height) / 2;
-
-  // If lines are cramped include some extra lead.
-  @if ($lines * $line-height - $font-size) < 2px {
-    $lines: $lines + .5;
-  }
-
-  @return $lines;
+  @return ceil(2 * $font-size / $line-height) / 2;
 }
 
 
