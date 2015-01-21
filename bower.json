@@ -6,13 +6,26 @@
     "Eric M. Suzanne"
   ],
   "description": "Size and scale helpers for typography and layout",
-  "main": "sass/_scale.scss",
+  "main": [
+    "sass/_scale.scss",
+    "sass/_math.scss",
+    "sass/_scale.config.scss",
+    "sass/_units.scss"
+    ],
   "keywords": [
     "sass",
     "css",
     "accoutrement"
   ],
   "license": "MIT",
+  "dependencies": {
+    "inuit-defaults": "0.2.1",
+    "inuit-functions": "0.2.0",
+    "inuit-mixins": "0.2.3",
+    "inuit-box-sizing": "0.2.0",
+    "inuit-normalize": "3.0.1",
+    "inuit-page": "0.2.1"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
