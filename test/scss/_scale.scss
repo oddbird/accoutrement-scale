@@ -79,13 +79,6 @@
     @include assert-equal($test, $expect,
       'Returns the number of lines needed for an explicit font size.');
   }
-
-  @include test('Add half-lines when spacing is too tight') {
-    $test: _get-lines(36px);
-    $expect: 2;
-    @include assert-equal($test, $expect,
-      'Returns extra space for tight line-heights.');
-  }
 }
 
 
