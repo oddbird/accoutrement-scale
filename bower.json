@@ -18,14 +18,6 @@
     "accoutrement"
   ],
   "license": "MIT",
-  "dependencies": {
-    "inuit-defaults": "0.2.1",
-    "inuit-functions": "0.2.0",
-    "inuit-mixins": "0.2.3",
-    "inuit-box-sizing": "0.2.0",
-    "inuit-normalize": "3.0.1",
-    "inuit-page": "0.2.1"
-  },
   "ignore": [
     "**/.*",
     "node_modules",
