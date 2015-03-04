@@ -2,30 +2,6 @@
 // ===========
 
 
-// [private] Get Size
-// ------------------
-@include test-module('_get-size [function]') {
-  @include test('Access named sizes') {
-    $test: _get-size(normal);
-    $expect: 0;
-    @include assert-equal($test, $expect,
-      'Returns a size or scale-position based on keyword.');
-  }
-}
-
-
-// [private] Get Ratio
-// -------------------
-@include test-module('_get-ratio [function]') {
-  @include test('Access named ratio') {
-    $test: _get-ratio(fifth);
-    $expect: 3/2;
-    @include assert-equal($test, $expect,
-      'Returns a ratio based on keyword.');
-  }
-}
-
-
 // Size
 // ----
 @include test-module('size [function]') {
@@ -63,25 +39,6 @@
 }
 
 
-// [private] Get Lines
-// -------------------
-@include test-module('_get-lines [function]') {
-  @include test('Calculate lines from named size') {
-    $test: _get-lines(h1);
-    $expect: 3.5;
-    @include assert-equal($test, $expect,
-      'Returns the number of lines needed for a named font size.');
-  }
-
-  @include test('Calculate lines from explicit length') {
-    $test: _get-lines(30px);
-    $expect: 1.5;
-    @include assert-equal($test, $expect,
-      'Returns the number of lines needed for an explicit font size.');
-  }
-}
-
-
 // Font Size [mixin]
 // -----------------
 @include test-module('font-size [mixin]') {
@@ -109,6 +66,27 @@
     }
   }
 }
+
+
+// Root Size [function]
+// --------------------
+$base-size: 20px;
+
+@include test-module('root-size [function]') {
+  @include test('Converts size to root browser size') {
+    $test: root-size(24px);
+    $expect: 1.5em;
+    @include assert-equal($test, $expect,
+      'Convert px to root browser ems');
+
+    $test: root-size(2rem);
+    $expect: 2.5em;
+    @include assert-equal($test, $expect,
+      'Convert rem to root browser ems');
+  }
+}
+
+$base-size: $_browser-default-font-size;
 
 // Square [mixin]
 // --------------
@@ -141,3 +119,47 @@
     }
   }
 }
+
+
+// [private] Get Size
+// ------------------
+@include test-module('_get-size [function]') {
+  @include test('Access named sizes') {
+    $test: _get-size(normal);
+    $expect: 0;
+    @include assert-equal($test, $expect,
+      'Returns a size or scale-position based on keyword.');
+  }
+}
+
+
+// [private] Get Ratio
+// -------------------
+@include test-module('_get-ratio [function]') {
+  @include test('Access named ratio') {
+    $test: _get-ratio(fifth);
+    $expect: 3/2;
+    @include assert-equal($test, $expect,
+      'Returns a ratio based on keyword.');
+  }
+}
+
+
+// [private] Get Lines
+// -------------------
+@include test-module('_get-lines [function]') {
+  @include test('Calculate lines from named size') {
+    $test: _get-lines(h1);
+    $expect: 3.5;
+    @include assert-equal($test, $expect,
+      'Returns the number of lines needed for a named font size.');
+  }
+
+  @include test('Calculate lines from explicit length') {
+    $test: _get-lines(30px);
+    $expect: 1.5;
+    @include assert-equal($test, $expect,
+      'Returns the number of lines needed for an explicit font size.');
+  }
+}
+

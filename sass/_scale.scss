@@ -5,6 +5,74 @@
 @import 'math';
 
 
+// Size
+// ----
+@function size(
+  $size,
+  $unit: $rhythm-unit
+) {
+  $size: _get-size($size);
+
+  @if type-of($size) == number {
+    @if unitless($size) {
+      $_ratio: _get-ratio($ratio);
+      @if $_ratio == 'linear' {
+        $size: $base-size * $size;
+      } @else {
+        $size: round($base-size * pow($_ratio, $size));
+      }
+    }
+
+    $size: convert-length($size, $unit);
+  }
+
+  @return $size;
+}
+
+
+// Font Size
+// ---------
+@mixin font-size(
+  $size: normal,
+  $lines: false
+) {
+  font-size: size($size);
+  line-height: if($lines, $lines, _get-lines($size)) * size(rhythm);
+}
+
+
+// Root Size
+// ---------
+@function root-size(
+  $size
+) {
+  $size: size($size, em);
+
+  @return $base-size / $_browser-default-font-size * $size;
+}
+
+
+// Square
+// ------
+@mixin square($size) {
+  $size: size($size);
+
+  height: $size;
+  width: $size;
+}
+
+
+// Baseline
+// --------
+@mixin baseline(
+  $base-size: $base-size,
+  $ratio: $ratio
+) {
+  font-size: percentage($base-size / $_browser-default-font-size);
+  line-height: size(rhythm, em);
+}
+
+
 // Get Size
 // --------
 @function _get-size(
@@ -35,31 +103,6 @@
 }
 
 
-// Size
-// ----
-@function size(
-  $size,
-  $unit: $rhythm-unit
-) {
-  $size: _get-size($size);
-
-  @if type-of($size) == number {
-    @if unitless($size) {
-      $_ratio: _get-ratio($ratio);
-      @if $_ratio == 'linear' {
-        $size: $base-size * $size;
-      } @else {
-        $size: round($base-size * pow($_ratio, $size));
-      }
-    }
-
-    $size: convert-length($size, $unit);
-  }
-
-  @return $size;
-}
-
-
 // Get Lines
 // ---------
 @function _get-lines(
@@ -70,35 +113,4 @@
   $line-height: size($rhythm, px);
 
   @return ceil(2 * $font-size / $line-height) / 2;
-}
-
-
-// Font Size
-// ---------
-@mixin font-size(
-  $size: normal,
-  $lines: false
-) {
-  font-size: size($size);
-  line-height: if($lines, $lines, _get-lines($size)) * size(rhythm);
-}
-
-
-// Square
-// ------
-@mixin square($size) {
-  $size: size($size);
-
-  height: $size;
-  width: $size;
-}
-
-
-// Establish Baseline
-@mixin baseline(
-  $base-size: $base-size,
-  $ratio: $ratio
-) {
-  font-size: percentage($base-size / $_browser-default-font-size);
-  line-height: size(rhythm, em);
 }

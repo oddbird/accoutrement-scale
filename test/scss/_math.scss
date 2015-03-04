@@ -12,6 +12,11 @@
       'Returns an exponential calculation.');
   }
 
+  @include test('Handles 0 power') {
+    @include assert-equal(pow(1.5, 0), 1,
+      'Returns 1 if the exponent is 0.');
+  }
+
   @include test('Calculates negative exponents') {
     @include assert-equal(pow(10, -1), .1,
       'Returns a negative exponential calculation.');
