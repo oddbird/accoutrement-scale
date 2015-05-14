@@ -23,7 +23,7 @@
     $ratio: octave !global;
 
     $test: size(-1);
-    $expect: 0.5rem;
+    $expect: .5rem;
     @include assert-equal($test, $expect,
       'Returns size calculated from multiplier.');
 

@@ -1,8 +1,8 @@
 accoutrement-scale
 ==================
 
-Size and scale helpers for typography and layout 
+Size and scale helpers for typography and layout
 
 ## Installation
 
-``bower install accoutrement-scale``
+``npm install accoutrement-scale``
