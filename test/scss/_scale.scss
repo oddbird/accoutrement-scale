@@ -39,6 +39,18 @@
 }
 
 
+// Negative [function]
+// -------------------
+@include test-module('negative [function]') {
+  @include test('Get negative size') {
+    @include assert-equal(
+      negative(gutter),
+      0 - size(gutter),
+      'Returns a keyword size, subtracted from zero.');
+  }
+}
+
+
 // Font Size [mixin]
 // -----------------
 @include test-module('font-size [mixin]') {

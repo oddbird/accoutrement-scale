@@ -30,6 +30,15 @@
 }
 
 
+// Negative
+// --------
+@function negative(
+  $size
+) {
+  @return 0 - size($size);
+}
+
+
 // Font Size
 // ---------
 @mixin font-size(
