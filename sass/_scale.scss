@@ -12,6 +12,7 @@
   $unit: $rhythm-unit
 ) {
   $size: _get-size($size);
+  $from-unit: unit($size);
 
   @if type-of($size) == number {
     @if unitless($size) {
@@ -23,7 +24,9 @@
       }
     }
 
-    $size: convert-length($size, $unit);
+    @if $unit and not index('ch' 'vw' 'vh' 'vmin', $from-unit) {
+      $size: convert-length($size, $unit);
+    }
   }
 
   @return $size;

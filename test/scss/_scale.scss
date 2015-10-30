@@ -36,6 +36,13 @@
     @include assert-equal($test, $expect,
       'Returns size converted from explicit length.');
   }
+
+  @include test('Dont adjust non-comparable units') {
+    $test: size(24vmin);
+    $expect: 24vmin;
+    @include assert-equal($test, $expect,
+      'Returns vmin size as given.');
+  }
 }
 
 
