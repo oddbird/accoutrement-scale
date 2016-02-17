@@ -1,0 +1,87 @@
+// Scale Tests
+// ===========
+
+
+$test-sizes: (
+  'big': 'text' ('fifth': 5),
+  'small': 'text' ('octave': -1),
+);
+
+$sizes: map-merge($sizes, $test-sizes);
+
+
+// Size [function]
+// ---------------
+@include test-module('size [function]') {
+  @include test('Get size from map setting') {
+    @include assert-equal(
+      size('rhythm'),
+      1.5rem,
+      'Returns named size from $sizes map.');
+  }
+
+  @include test('Get size from linear adjustment') {
+    @include assert-equal(
+      size('h3'),
+      2rem,
+      'Returns size calculated from linear adjustment.');
+  }
+
+  @include test('Get size from ratio adjustment') {
+    @include assert-equal(
+      size('big'),
+      7.625rem,
+      'Returns size calculated from ratio adjustment.');
+  }
+
+  @include test('Get size from negative ratio') {
+    @include assert-equal(
+      size('small'),
+      0.5rem,
+      'Returns size calculated from negative ratio.');
+  }
+
+  @include test('Get unit-adjusted size') {
+    @include assert-equal(
+      size(24px, 'rem'),
+      1.5rem,
+      'Returns size converted from explicit length.');
+  }
+
+  @include test('Dont adjust non-comparable units') {
+    $test: size(24vmin);
+    $expect: 24vmin;
+    @include assert-equal($test, $expect,
+      'Returns vmin size as given.');
+  }
+}
+
+
+// Negative [function]
+// -------------------
+@include test-module('negative [function]') {
+  @include test('Get negative size') {
+    @include assert-equal(
+      negative('rhythm'),
+      0 - size('rhythm'),
+      'Returns a keyword size, subtracted from zero.');
+  }
+}
+
+
+// Square [mixin]
+// --------------
+@include test-module('square [mixin]') {
+  @include test('Set height and width') {
+    @include assert('Output height/width based on keyword') {
+      @include input {
+        @include square('h1');
+      }
+
+      @include expect {
+        height: 4rem;
+        width: 4rem;
+      }
+    }
+  }
+}

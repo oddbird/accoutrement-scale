@@ -1,0 +1,29 @@
+// Scale Utility Tests
+// ===================
+
+$ratios: ('new': 'octave');
+
+// [private] Get Ratio
+// -------------------
+@include test-module('_get-ratio [function]') {
+  @include test('Named ratio') {
+    @include assert-equal(
+      _get-ratio('fifth'),
+      3/2,
+      'Returns a ratio based on keyword.');
+  }
+
+  @include test('Linear ratio') {
+    @include assert-equal(
+      _get-ratio('linear'),
+      'linear',
+      'Returns a linear ratio unchanged.');
+  }
+
+  @include test('Recursive ratio') {
+    @include assert-equal(
+      _get-ratio('new'),
+      _get-ratio('octave'),
+      'Returns a recursizely named ratio.');
+  }
+}

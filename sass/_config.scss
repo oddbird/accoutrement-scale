@@ -1,0 +1,52 @@
+// Scale Settings
+// --------------
+
+$_browser-default-font-size: 16px;
+
+$_default-ratios: (
+  'octave': 2,
+  'major-seventh': 15 / 8,
+  'minor-seventh': 16 / 9,
+  'major-sixth': 5 / 3,
+  'minor-sixth': 8 / 5,
+  'fifth': 3 / 2,
+  'augmented-fourth': 45 / 32,
+  'fourth': 4 / 3,
+  'major-third': 5 / 4,
+  'minor-third': 6 / 5,
+  'major-second': 9 / 8,
+  'minor-second': 16 / 15,
+);
+
+
+// Get Ratio
+// ---------
+@function _get-ratio(
+  $ratio
+) {
+  $_ratio-options: map-merge($_default-ratios, $ratios);
+  $_new-ratio: map-get($_ratio-options, $ratio) or $ratio;
+
+  @if ($ratio != $_new-ratio) and map-has-key($_ratio-options, $_new-ratio) {
+    $_new-ratio: _get-ratio($_new-ratio);
+  }
+
+  @return $_new-ratio;
+}
+
+
+// Config
+// ------
+
+$default-units: 'rem' !default;
+$ratios: () !default;
+
+$sizes: (
+  'root': $_browser-default-font-size,
+  'text': 'root',
+  'rhythm': 'text' ('fifth': 1),
+
+  'h1': 'text' ('linear': 4),
+  'h2': 'text' ('linear': 3),
+  'h3': 'text' ('linear': 2),
+) !default;

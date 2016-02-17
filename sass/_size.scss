@@ -1,0 +1,65 @@
+// Base API
+// ========
+
+
+// Size
+// ----
+@function size(
+  $size,
+  $unit: $default-units
+) {
+  // Parse arguments
+  $size: map-get($sizes, $size) or $size;
+  $base: nth($size, 1);
+  $adjust: if(length($size) > 1, nth($size, 2), ());
+
+  // Recursive check
+  $size: if(map-has-key($sizes, $base), size($base, false), $base);
+
+  // Adjustments
+  @each $ratio, $value in $adjust {
+    $ratio: _get-ratio($ratio);
+    @if $ratio == 'linear' {
+      $size: $size * $value;
+    } @else {
+      $multiplier: _accoutrement-pow($ratio, $value);
+      $size: round($size * $multiplier);
+    }
+  }
+
+  // Validation
+  @if type-of($size) != 'number' {
+    @error '#{$size} is not a valid length for CSS.';
+  }
+
+  // Units
+  @if $unit and not index('ch' 'vw' 'vh' 'vmin', unit($size)) {
+    $size: convert-units($size, $unit);
+  }
+
+  // Return
+  @return $size;
+}
+
+
+// Negative
+// --------
+@function negative(
+  $size,
+  $unit: $default-units
+) {
+  @return 0 - size($size, $unit);
+}
+
+
+// Square
+// ------
+@mixin square(
+  $size,
+  $unit: $default-units
+) {
+  $size: size($size, $unit);
+
+  height: $size;
+  width: $size;
+}

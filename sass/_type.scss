@@ -1,0 +1,58 @@
+// Type
+// ====
+
+
+// Get Lines
+// ---------
+@function _get-lines(
+  $size: 'root',
+  $rhythm: 'rhythm'
+) {
+  $font-size: size($size, 'px');
+  $line-height: size($rhythm, 'px');
+
+  @return ceil(2 * $font-size / $line-height) / 2;
+}
+
+
+// Font Size
+// ---------
+@mixin font-size(
+  $size,
+  $lines: false
+) {
+  $rhythm: size('rhythm');
+  $height: ($lines or _get-lines($size)) * $rhythm;
+  $size: size($size);
+
+  @if not $lines and ($size == $height) {
+    $height: $height + ($rhythm / 2);
+  }
+
+  font-size: $size;
+  line-height: $height;
+}
+
+
+// Root Size
+// ---------
+@function browser-ems(
+  $size
+) {
+  $size: size($size, 'px');
+
+  @return $size / $_browser-default-font-size * 1em;
+}
+
+
+// Baseline
+// --------
+@mixin baseline(
+  $root-size: 'root',
+  $line-height: 'rhythm'
+) {
+  $root-size: size($root-size, 'px');
+
+  font-size: percentage($root-size / $_browser-default-font-size);
+  line-height: size($line-height, 'em');
+}

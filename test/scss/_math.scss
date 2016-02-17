@@ -3,22 +3,22 @@
 
 // POW
 // ---
-@include test-module('pow [function]') {
+@include test-module('_accoutrement-pow [function]') {
   @include test('Calculates exponential math') {
-    @include assert-equal(pow(6, 1), 6,
+    @include assert-equal(_accoutrement-pow(6, 1), 6,
       'Returns a number directly if the exponent is 1.');
 
-    @include assert-equal(pow(6, 6), 46656,
+    @include assert-equal(_accoutrement-pow(6, 6), 46656,
       'Returns an exponential calculation.');
   }
 
   @include test('Handles 0 power') {
-    @include assert-equal(pow(1.5, 0), 1,
+    @include assert-equal(_accoutrement-pow(1.5, 0), 1,
       'Returns 1 if the exponent is 0.');
   }
 
   @include test('Calculates negative exponents') {
-    @include assert-equal(pow(10, -1), .1,
+    @include assert-equal(_accoutrement-pow(10, -1), 0.1,
       'Returns a negative exponential calculation.');
   }
 }

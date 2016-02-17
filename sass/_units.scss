@@ -1,24 +1,22 @@
 // Unit Helpers
 // ------------
 
-@import 'scale.config';
-
 
 // Convert Length
 // --------------
-@function convert-length(
+@function convert-units(
   $length,
-  $to-unit,
-  $from-context: $base-size,
+  $to-unit: $default-units,
+  $from-context: $_browser-default-font-size,
   $to-context: $from-context
 ) {
+  $root-size: map-get($sizes, 'root') or $_browser-default-font-size;
   $from-unit: unit($length);
 
   // Optimize for cases where `from` and `to` units are accidentally the same.
   @if $from-unit == $to-unit {
     @return $length;
   }
-
 
   // Context values must be in px
   @if unit($from-context) != 'px' {
@@ -29,34 +27,25 @@
     @warn 'Parameter $to-context must resolve to a value in pixel units.';
   }
 
-
   // Convert input length to pixels
   $px-length: $length;
 
   @if $from-unit != 'px' {
-
-    // Convert relative units using the from-context parameter.
-    @if $from-unit == 'em' {
+    @if $from-unit == 'em' { // Convert relative units using the from-context parameter.
       $px-length: $length * $from-context / 1em;
     } @else if $from-unit == 'rem' {
-      $px-length: $length * $base-size / 1rem;
+      $px-length: $length * $root-size / 1rem;
     } @else if $from-unit == '%' {
       $px-length: $length * $from-context / 100%;
     } @else if $from-unit == 'ex'  {
       $px-length: $length * $from-context / 2ex;
-    }
-
-    // Convert absolute units using Sass' conversion table.
-    @else if index('in' 'mm' 'cm' 'pt' 'pc', $from-unit) {
+    } @else if index('in' 'mm' 'cm' 'pt' 'pc', $from-unit) { // Convert absolute units using Sass' conversion table.
       $px-length: 0px + $length;
-    }
-
-    // Certain units can't be converted.
-    @else if index('ch' 'vw' 'vh' 'vmin', $from-unit) {
-      @warn "#{$from-unit} units can't be reliably converted; Returning original value.";
+    } @else if index('ch' 'vw' 'vh' 'vmin', $from-unit) { // Certain units can't be converted.
+      @warn '#{$from-unit} units can’t be reliably converted; Returning original value.';
       @return $length;
     } @else {
-      @warn "#{$from-unit} is an unknown length unit. Returning original value.";
+      @warn '#{$from-unit} is an unknown length unit. Returning original value.';
       @return $length;
     }
   }
@@ -65,20 +54,15 @@
   $output-length: $px-length;
 
   @if $to-unit != 'px' {
-
-    // Relative units
-    @if $to-unit == 'em' {
+    @if $to-unit == 'em' { // Relative units
       $output-length: $px-length * 1em / $to-context;
     } @else if $to-unit == 'rem' {
-      $output-length: $px-length * 1rem / $base-size;
+      $output-length: $px-length * 1rem / $root-size;
     } @else if $to-unit == '%' {
       $output-length: $px-length * 100% / $to-context;
     } @else if $to-unit == 'ex' {
       $output-length: $px-length * 2ex / $to-context;
-    }
-
-    // Absolute units
-    @else if $to-unit == 'in' {
+    } @else if $to-unit == 'in' { // Absolute units
       $output-length: 0in + $px-length;
     } @else if $to-unit == 'mm' {
       $output-length: 0mm + $px-length;
@@ -88,14 +72,11 @@
       $output-length: 0pt + $px-length;
     } @else if $to-unit == 'pc' {
       $output-length: 0pc + $px-length;
-    }
-
-    // Non-convertible units
-    @else if index('ch' 'vw' 'vh' 'vmin', $to-unit) {
-      @warn "#{$to-unit} units can't be reliably converted; Returning original value.";
+    } @else if index('ch' 'vw' 'vh' 'vmin', $to-unit) { // Non-convertible units
+      @warn '#{$to-unit} units can’t be reliably converted; Returning original value.';
       @return $length;
     } @else {
-      @warn "#{$to-unit} is an unknown length unit. Returning original value.";
+      @warn '#{$to-unit} is an unknown length unit. Returning original value.';
       @return $length;
     }
   }

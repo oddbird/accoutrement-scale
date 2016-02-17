@@ -1,10 +1,19 @@
 // Math Helpers
 // ============
 
-@function pow(
+
+// Pow
+// ---
+@function _accoutrement-pow(
   $number,
   $exponent
 ) {
+  // mathsass pow function
+  @if function-exists('pow') {
+    @return pow($number, $exponent);
+  }
+
+  // Simple pow function fallback
   $_return: 1;
 
   @if $exponent == 0 {

@@ -1,6 +1,6 @@
 {
   "name": "accoutrement-scale",
-  "version": "1.1.1",
+  "version": "2.0.0-beta.1",
   "description": "Size and scale helpers for typography and layout.",
   "homepage": "https://github.com/oddbird/accoutrement-scale",
   "repository": {
@@ -8,10 +8,17 @@
     "url": "git://github.com/oddbird/accoutrement-scale.git"
   },
   "devDependencies": {
-    "mocha": "^2.1.0",
-    "sass-true": "^2.0.2"
+    "chalk": "^1.1.1",
+    "gulp": "^3.9.1",
+    "gulp-sass-lint": "^1.1.1",
+    "gulp-util": "^3.0.7",
+    "mathsass": "^0.9.5",
+    "mocha": "^2.4.5",
+    "sass-true": "^2.0.3",
+    "sassdoc": "^2.1.20",
+    "sassdoc-theme-herman": "^0.2.1"
   },
-  "author": "Eric M Suzanne <eric@oddbird.net>",
+  "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",
   "keywords": [
     "sass",
@@ -23,10 +30,13 @@
     "eyeglass-module"
   ],
   "eyeglass": {
-    "exports": "eyeglass-exports.js"
+    "needs": "^0.8.2",
+    "sassDir": "./_mq.scss",
+    "exports": false
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha",
+    "release": "npm run test && gulp sasslint && gulp sassdoc"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-scale/issues"

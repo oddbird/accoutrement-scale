@@ -1,8 +1,17 @@
 accoutrement-scale
 ==================
 
-Size and scale helpers for typography and layout
+Sass size & scale management tools.
+Gather all your sizes into a single map,
+access them by name,
+and generate sizes based on [modular scales][ms].
 
-## Installation
+[ms]: http://www.modularscale.com/
 
-``npm install accoutrement-scale``
+
+Quick Start
+-----------
+
+```bash
+npm install accoutrement-scale
+```

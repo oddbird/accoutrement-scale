@@ -4,8 +4,10 @@
 @import '../../node_modules/sass-true/sass/true';
 @import '../../sass/scale';
 
+@import 'config';
 @import 'math';
 @import 'units';
-@import 'scale';
+@import 'size';
+@import 'type';
 
 @include report;

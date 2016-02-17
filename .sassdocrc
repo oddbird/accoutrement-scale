@@ -1,0 +1,10 @@
+theme: 'herman'
+
+display:
+  access:
+    - public
+
+groups:
+  config: configuration
+  util: utilities
+  contrast: contrast

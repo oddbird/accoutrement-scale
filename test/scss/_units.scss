@@ -4,67 +4,67 @@
 
 // Convert Length
 // --------------
-@include test-module('convert-length [function]') {
+@include test-module('convert-units [function]') {
   @include test('No conversion for equal units') {
-    $test: convert-length(6em, em);
-    $expect: 6em;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(6em, 'em'),
+      6em,
       'Return length directly when from- and to- units match.');
   }
 
   @include test('Convert px to em') {
-    $test: convert-length(16px, em);
-    $expect: 1em;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(16px, 'em'),
+      1em,
       'Returns em length from px input.');
   }
 
   @include test('Convert px to %') {
-    $test: convert-length(16px, '%', $to-context: 1600px);
-    $expect: 1%;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(16px, '%', $to-context: 1600px),
+      1%,
       'Returns % conversion from px.');
   }
 
   @include test('Convert em to %') {
-    $test: convert-length(1.35em, '%', $to-context: 600px);
-    $expect: 3.6%;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(1.35em, '%', $to-context: 600px),
+      3.6%,
       'Returns % conversion from em.');
   }
 
   @include test('Convert px to ex') {
-    $test: convert-length(16px, ex);
-    $expect: 2ex;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(16px, 'ex'),
+      2ex,
       'Returns ex conversion from px.');
   }
 
   @include test('Convert % to px') {
-    $test: convert-length(150%, px, 18px);
-    $expect: 27px;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(150%, 'px', 18px),
+      27px,
       'Returns px conversion from %.');
   }
 
   @include test('Convert px to rem') {
-    $test: convert-length(1px, rem);
-    $expect: .0625rem;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(1px, 'rem'),
+      0.0625rem,
       'Returns rem conversion from px.');
   }
 
   @include test('Convert em to mm') {
-    $test: convert-length(2em, mm, 18px);
-    $expect: 9.525mm;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(2em, 'mm', 18px),
+      9.525mm,
       'Returns mm conversion from em.');
   }
 
   @include test('Convert rem to px') {
-    $test: convert-length(1rem, px);
-    $expect: 16px;
-    @include assert-equal($test, $expect,
+    @include assert-equal(
+      convert-units(1rem, 'px'),
+      16px,
       'Returns px conversion from rem.');
   }
 }
