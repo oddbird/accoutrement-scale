@@ -1,9 +1,26 @@
 // Scale Settings
 // --------------
 
-$_browser-default-font-size: 16px;
 
-$_default-ratios: (
+// Browser Default Font Size
+// -------------------------
+/// The default font-size used by most browsers.
+/// @access private
+$_BROWSER-DEFAULT-FONT-SIZE: 16px;
+
+
+// Default Ratios
+// --------------
+/// Common pre-defined ratios that you can access by name.
+/// Numeric ratios (like the musical scale) are exponential —
+/// while a 'linear' scale uses simple multipliers.
+/// This variable should not be edited.
+/// Use the `$ratios` variable to add your own ratios,
+/// or aliases for built-in ratios.
+///
+/// @group config
+/// @type Map
+$_DEFAULT-RATIOS: (
   'octave': 2,
   'major-seventh': 15 / 8,
   'minor-seventh': 16 / 9,
@@ -16,15 +33,43 @@ $_default-ratios: (
   'minor-third': 6 / 5,
   'major-second': 9 / 8,
   'minor-second': 16 / 15,
+  'multiple': 'linear',
 );
+
+
+// Ratios
+// ------
+/// Defined your own ratios,
+/// or aliases for built-in ratios.
+///
+/// @group config
+/// @type Map
+///
+/// @example scss -
+///   $ratios: (
+///     'line-height': 1 / 3,
+///     'headings': 'linear',
+///     'golden': 1.61803399,
+///   );
+$ratios: () !default;
 
 
 // Get Ratio
 // ---------
+/// Retrieve a ratio by name
+/// from either the `$_DEFAULT-RATIOS`
+/// or user `$ratios` configurations.
+///
+/// @access private
+///
+/// @param {String | Number} $ratio -
+///   The key-name or value of a ratio
+/// @return {Number} -
+///   The numeric value of a ratio
 @function _get-ratio(
   $ratio
 ) {
-  $_ratio-options: map-merge($_default-ratios, $ratios);
+  $_ratio-options: map-merge($_DEFAULT-RATIOS, $ratios);
   $_new-ratio: map-get($_ratio-options, $ratio) or $ratio;
 
   @if ($ratio != $_new-ratio) and map-has-key($_ratio-options, $_new-ratio) {
@@ -35,14 +80,30 @@ $_default-ratios: (
 }
 
 
-// Config
-// ------
-
+// Default Units
+// -------------
+/// Defined the default units to use when accessing sizes.
+///
+/// @group config
+/// @type String
 $default-units: 'rem' !default;
-$ratios: () !default;
 
+
+// Sizes
+// -----
+/// Defined a palette of common sizes to be used across your project,
+/// in the format "name: size" or "name: basis (ratio: multiplier)".
+/// If your map includes a value for `root`,
+/// it will be used in relative-size unit conversions.
+///
+/// @group config
+/// @type String
+///
+/// @property 'root' [16px] -
+///   The root font size for your document,
+///   used for calculating relative sizes.
 $sizes: (
-  'root': $_browser-default-font-size,
+  'root': $_BROWSER-DEFAULT-FONT-SIZE,
   'text': 'root',
   'rhythm': 'text' ('fifth': 1),
 

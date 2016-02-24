@@ -2,15 +2,76 @@
 // ------------
 
 
-// Convert Length
-// --------------
+// Get PX [function]
+// -----------------
+/// If a value can be converted to px by Sass, do it.
+///
+/// @access private
+///
+/// @param {Number} $length -
+///   The number to be converted to px if comparable.
+/// @return {Number | false} -
+///   Either the `px` value of the converted `$length` or `false`.
+@function _get-px(
+  $length
+) {
+  @return if(comparable($length, 1px), 0px + $length, false);
+}
+
+
+// Get Number [function]
+// ---------------------
+/// Get a `0`-value for any absolute unit.
+///
+/// @access private
+///
+/// @param {String} $unit -
+///   The unit to return as a number.
+/// @return {Number | false} -
+///   Either the `0` value of a unit or `false`.
+@function _get-number(
+  $unit
+) {
+  $_absolute: (
+    'in': 0in,
+    'mm': 0mm,
+    'cm': 0cm,
+    'pt': 0pt,
+    'pc': 0pc,
+    'px': 0px,
+  );
+
+  @return map-get($_absolute, $unit) or false;
+}
+
+
+// Convert Length [function]
+// -------------------------
+/// Convert lengths between most units.
+///
+/// @group units
+///
+/// @param {Number} $length -
+///   The length to be converted
+/// @param {String} $to-unit [$default-units] -
+///   The desired units to convert to.
+///   Some units (`ch`, `vw`, `vh`, `vmin`, `vmax`) cannot be converted.
+/// @param {Number} $from-context [$_BROWSER-DEFAULT-FONT-SIZE] -
+///   When converting from relative units,
+///   the absolute length (in px) to which $length refers —
+///   e.g. for `$lengths` in em units, would normally be the
+///   font-size of the current element.
+/// @param {Number} $to-context [$from-context] -
+///   For converting *to* relative units,
+///   the absolute length in px to which the output value will refer.
+///   Defaults to the same as `$from-context`, since it is rarely needed.
 @function convert-units(
   $length,
   $to-unit: $default-units,
-  $from-context: $_browser-default-font-size,
+  $from-context: $_BROWSER-DEFAULT-FONT-SIZE,
   $to-context: $from-context
 ) {
-  $root-size: map-get($sizes, 'root') or $_browser-default-font-size;
+  $_convertable: ('in', 'mm', 'cm', 'pt', 'pc', 'px', 'em', 'rem', '%', 'ex');
   $from-unit: unit($length);
 
   // Optimize for cases where `from` and `to` units are accidentally the same.
@@ -18,68 +79,58 @@
     @return $length;
   }
 
-  // Context values must be in px
-  @if unit($from-context) != 'px' {
-    @warn 'Paremeter $from-context must resolve to a value in pixel units.';
-  }
-
-  @if unit($to-context) != 'px' {
-    @warn 'Parameter $to-context must resolve to a value in pixel units.';
-  }
-
-  // Convert input length to pixels
-  $px-length: $length;
-
-  @if $from-unit != 'px' {
-    @if $from-unit == 'em' { // Convert relative units using the from-context parameter.
-      $px-length: $length * $from-context / 1em;
-    } @else if $from-unit == 'rem' {
-      $px-length: $length * $root-size / 1rem;
-    } @else if $from-unit == '%' {
-      $px-length: $length * $from-context / 100%;
-    } @else if $from-unit == 'ex'  {
-      $px-length: $length * $from-context / 2ex;
-    } @else if index('in' 'mm' 'cm' 'pt' 'pc', $from-unit) { // Convert absolute units using Sass' conversion table.
-      $px-length: 0px + $length;
-    } @else if index('ch' 'vw' 'vh' 'vmin', $from-unit) { // Certain units can't be converted.
-      @warn '#{$from-unit} units can’t be reliably converted; Returning original value.';
-      @return $length;
-    } @else {
-      @warn '#{$from-unit} is an unknown length unit. Returning original value.';
+  // Warn and escape when units are not convertable
+  @each $units in ($from-unit, $to-unit) {
+    @if not index($_convertable, $units) {
+      @warn '#{$units} units can’t be reliably converted; Returning original value.';
       @return $length;
     }
+  }
+
+  // Optomize comparable (non-relative) units
+  $absolute-output: _get-number($to-unit);
+
+  @if $absolute-output and comparable($length, $absolute-output)  {
+    @return $absolute-output + $length;
+  }
+
+  // Establish relative context
+  $root-size: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE;
+  $from-context: _get-px($from-context);
+  $to-context: _get-px($to-context);
+
+  // Context values must be in px
+  @if (not $from-context) or (not $to-context) {
+    @error 'Context paremeters must resolve to a value in pixel units.';
+  }
+
+  // Convert relative length to pixels
+  $px-length: _get-px($length) or $length;
+  $from-unit: unit($px-length);
+
+  // Convert relative units using the from-context parameter.
+  @if $from-unit == 'em' {
+    $px-length: $length * $from-context / 1em;
+  } @else if $from-unit == 'rem' {
+    $px-length: $length * $root-size / 1rem;
+  } @else if $from-unit == '%' {
+    $px-length: $length * $from-context / 100%;
+  } @else if $from-unit == 'ex'  {
+    $px-length: $length * $from-context / 2ex;
   }
 
   // Convert length in pixels to the output unit
-  $output-length: $px-length;
-
-  @if $to-unit != 'px' {
-    @if $to-unit == 'em' { // Relative units
-      $output-length: $px-length * 1em / $to-context;
-    } @else if $to-unit == 'rem' {
-      $output-length: $px-length * 1rem / $root-size;
-    } @else if $to-unit == '%' {
-      $output-length: $px-length * 100% / $to-context;
-    } @else if $to-unit == 'ex' {
-      $output-length: $px-length * 2ex / $to-context;
-    } @else if $to-unit == 'in' { // Absolute units
-      $output-length: 0in + $px-length;
-    } @else if $to-unit == 'mm' {
-      $output-length: 0mm + $px-length;
-    } @else if $to-unit == 'cm' {
-      $output-length: 0cm + $px-length;
-    } @else if $to-unit == 'pt' {
-      $output-length: 0pt + $px-length;
-    } @else if $to-unit == 'pc' {
-      $output-length: 0pc + $px-length;
-    } @else if index('ch' 'vw' 'vh' 'vmin', $to-unit) { // Non-convertible units
-      @warn '#{$to-unit} units can’t be reliably converted; Returning original value.';
-      @return $length;
-    } @else {
-      @warn '#{$to-unit} is an unknown length unit. Returning original value.';
-      @return $length;
-    }
+  @if $absolute-output {
+    @return $absolute-output + $px-length;
+  } @else if $to-unit == 'em' {
+    @return $px-length * 1em / $to-context;
+  } @else if $to-unit == 'rem' {
+    @return $px-length * 1rem / $root-size;
+  } @else if $to-unit == '%' {
+    @return $px-length * 100% / $to-context;
+  } @else if $to-unit == 'ex' {
+    @return $px-length * 2ex / $to-context;
   }
 
-  @return $output-length;
+  @error 'Failed to convert #{$length} into #{$to-units}.';
 }

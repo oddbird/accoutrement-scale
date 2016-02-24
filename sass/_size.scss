@@ -2,8 +2,27 @@
 // ========
 
 
-// Size
-// ----
+// Size [function]
+// ---------------
+/// Access a named size in your `$sizes` map,
+/// using any comparable units.
+///
+/// @group sizes
+///
+/// @param {String | Length | List} $size -
+///   The name of a size in your configuration (e.g. `line-height`),
+///   or a length to be converted into different units (e.g. `24px`),
+///   or a base-size and adjustments to be made
+///   (e.g. `24px ('minor-third': 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @param {String} $unit [$default-units] -
+///   The desired units for the output (e.g. `px` or `rem`).
+/// @throw -
+///   The calculated value is not a valid CSS length.
+/// @return {Length} -
+///   The calculated length, in the requested units.
 @function size(
   $size,
   $unit: $default-units
@@ -42,8 +61,25 @@
 }
 
 
-// Negative
-// --------
+// Negative [function]
+// -------------------
+/// Return the negative value of any length,
+/// in comparable units.
+///
+/// @group sizes
+///
+/// @param {String | Length | List} $size -
+///   The name of a size in your configuration (e.g. `line-height`),
+///   or a length to be converted into different units (e.g. `24px`),
+///   or a base-size and adjustments to be made
+///   (e.g. `24px ('minor-third': 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @param {String} $unit [$default-units] -
+///   The desired units for the output (e.g. `px` or `rem`).
+/// @return {Length} -
+///   The calculated negative length, in the requested units.
 @function negative(
   $size,
   $unit: $default-units
@@ -52,8 +88,26 @@
 }
 
 
-// Square
-// ------
+// Square [mixin]
+// --------------
+/// Create a square by setting equal CSS `height` and `width` properties
+/// with the given size & unit value.
+///
+/// @group sizes
+///
+/// @param {String | Length | List} $size -
+///   The name of a size in your configuration (e.g. `line-height`),
+///   or a length to be converted into different units (e.g. `24px`),
+///   or a base-size and adjustments to be made
+///   (e.g. `24px ('minor-third': 2)`).
+///   For the sake of consistent documentation,
+///   I recommend keeping adjustments in the configuration
+///   whenever possible.
+/// @param {String} $unit [$default-units] -
+///   The desired units for the output (e.g. `px` or `rem`).
+/// @output -
+///   Equal CSS height and width properties,
+///   set to the given size and units.
 @mixin square(
   $size,
   $unit: $default-units

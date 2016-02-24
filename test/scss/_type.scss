@@ -85,7 +85,7 @@ $sizes: map-merge($sizes, ('root': 20px));
   }
 }
 
-$sizes: map-merge($sizes, ('root': $_browser-default-font-size));
+$sizes: map-merge($sizes, ('root': $_BROWSER-DEFAULT-FONT-SIZE));
 
 
 // Baseline [mixin]
