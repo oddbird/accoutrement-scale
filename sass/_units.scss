@@ -58,7 +58,7 @@
 ///   Some units (`ch`, `vw`, `vh`, `vmin`, `vmax`) cannot be converted.
 /// @param {Number} $from-context [$_BROWSER-DEFAULT-FONT-SIZE] -
 ///   When converting from relative units,
-///   the absolute length (in px) to which $length refers —
+///   the absolute length (in px) to which $length refers -
 ///   e.g. for `$lengths` in em units, would normally be the
 ///   font-size of the current element.
 /// @param {Number} $to-context [$from-context] -
@@ -82,7 +82,7 @@
   // Warn and escape when units are not convertable
   @each $units in ($from-unit, $to-unit) {
     @if not index($_convertable, $units) {
-      @warn '#{$units} units can’t be reliably converted; Returning original value.';
+      @warn "#{$units} units can't be reliably converted; Returning original value.";
       @return $length;
     }
   }
