@@ -80,15 +80,6 @@ $ratios: () !default;
 }
 
 
-// Default Units
-// -------------
-/// Defined the default units to use when accessing sizes.
-///
-/// @group config
-/// @type String
-$default-units: 'rem' !default;
-
-
 // Sizes
 // -----
 /// Defined a palette of common sizes to be used across your project,
@@ -104,7 +95,7 @@ $default-units: 'rem' !default;
 ///   used for calculating relative sizes.
 $sizes: (
   'root': $_BROWSER-DEFAULT-FONT-SIZE,
-  'text': 'root',
+  'text': 'root' ('convert-units': 'rem'),
   'rhythm': 'text' ('fifth': 1),
 
   'h1': 'text' ('linear': 4),

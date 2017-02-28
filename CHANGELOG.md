@@ -1,0 +1,16 @@
+Accoutrement-Scale Changelog
+============================
+
+
+3.0.0 - 02/29/17
+----------------
+- BREAKING: Don't convert units unless specifically requested.
+  This allows you to define preferred units per-item
+  in the configuration map.
+- BREAKING: Remove `$default-units` setting. See above.
+- Allow arbitrary adjustment functions
+  in the `$sizes` map,
+  e.g. `'my-size': 24px ('add': 12px)`,
+  where `add` is an available function
+  that will accept `24px, 12px` as arguments.
+

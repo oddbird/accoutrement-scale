@@ -15,9 +15,16 @@ $sizes: map-merge($sizes, $test-sizes);
 @include test-module('size [function]') {
   @include test('Get size from map setting') {
     @include assert-equal(
-      size('rhythm'),
-      1.5rem,
+      size('root'),
+      16px,
       'Returns named size from $sizes map.');
+  }
+
+  @include test('Get size from unit adjustment') {
+    @include assert-equal(
+      size('text'),
+      1rem,
+      'Returns size calculated from unit adjustment.');
   }
 
   @include test('Get size from linear adjustment') {
@@ -30,7 +37,7 @@ $sizes: map-merge($sizes, $test-sizes);
   @include test('Get size from ratio adjustment') {
     @include assert-equal(
       size('big'),
-      7.625rem,
+      7.59375rem,
       'Returns size calculated from ratio adjustment.');
   }
 
@@ -83,5 +90,49 @@ $sizes: map-merge($sizes, $test-sizes);
         width: 4rem;
       }
     }
+  }
+}
+
+
+// For testing...
+@function _plus-test-function(
+  $size,
+  $add
+) {
+  @return $size + $add;
+}
+
+
+// Adjust Size [function]
+// ----------------------
+@include test-module('adjust-size [function]') {
+  @include test('Adjust units') {
+    @include assert-equal(
+      _accoutrement-adjust-size(24px, 'convert-units', 'rem'),
+      1.5rem);
+  }
+
+  @include test('Linear adjustment') {
+    @include assert-equal(
+      _accoutrement-adjust-size(24px, 'linear', 3),
+      72px);
+  }
+
+  @include test('Explicit ratio adjustment') {
+    @include assert-equal(
+      _accoutrement-adjust-size(24px, 1.5, 2),
+      54px);
+  }
+
+  @include test('Named ratio adjustment') {
+    @include assert-equal(
+      _accoutrement-adjust-size(24px, 'fifth', 2),
+      54px);
+  }
+
+  @include test('Arbitrary adjustment') {
+    @include assert-equal(
+      _accoutrement-adjust-size(24px, '_plus-test-function', 2px),
+      24px + 2px);
   }
 }

@@ -26,19 +26,16 @@ Import the library:
 @import 'path/to/accoutrement-scale/sass/scale'
 ```
 
-Establish your palette of ratios and sizes,
-along with the default units needed for output:
+Establish your palette of ratios and sizes:
 
 ```scss
-$default-units: 'rem';
-
 $ratios: (
   'my-ratio': 1.25,
 );
 
 $sizes: (
   'root': 24px,
-  'rhythm': 'root' ('fifth': 1),
+  'rhythm': 'root' ('fifth': 1, 'convert-units': 'rem'),
 
   'h1': 'root' ('my-ratio': 3),
   'h2': 'root' ('my-ratio': 2),
@@ -46,6 +43,17 @@ $sizes: (
 
   'page': '8in',
 );
+```
+
+Results will be returned in the units they were defined,
+but can be converted in the map settings (as above),
+or on-the-fly using `size`:
+
+```scss
+.example {
+  // size('page') would return `8in`...
+  width: size('page', 'px');
+}
 ```
 
 Access your sizes from anywhere,
