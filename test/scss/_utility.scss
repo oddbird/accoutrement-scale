@@ -1,0 +1,22 @@
+// Sass Utilities
+// ==============
+
+
+@include test-module('Get Function [function]') {
+  $test: _ac-scale-get-function('size');
+  $expect: 'size';
+
+  @if function-exists('get-function') {
+    $expect: get-function('size');
+  }
+
+  @include test('Returns a function or function-name') {
+    @include assert-equal($test, $expect);
+  }
+
+  @include test('Returned function or name is callable') {
+    @include assert-equal(
+      call($test, 'root'),
+      size('root'));
+  }
+}

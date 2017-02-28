@@ -82,7 +82,7 @@
   // Warn and escape when units are not convertable
   @each $units in ($from-unit, $to-unit) {
     @if not index($_convertable, $units) {
-      @warn '#{$units} units can’t be reliably converted; Returning original value.';
+      @warn "#{$units} units can't be reliably converted; Returning original value.";
       @return $length;
     }
   }

@@ -37,7 +37,7 @@
 
   // Adjustments
   @each $key, $value in $adjust {
-    $size: _accoutrement-adjust-size($size, $key, $value);
+    $size: _ac-scale-adjust-size($size, $key, $value);
   }
 
   // Validation
@@ -134,7 +134,7 @@
 ///   or additional arguments to be passed to a function.
 /// @return {Number} -
 ///   Results of the adjustment.
-@function _accoutrement-adjust-size(
+@function _ac-scale-adjust-size(
   $size,
   $key,
   $value
@@ -147,7 +147,8 @@
     $multiplier: _accoutrement-pow($ratio, $value);
     @return $size * $multiplier;
   } @else if function-exists($key) {
-    @return call($key, $size, $value...);
+    $function: _ac-scale-get-function($key);
+    @return call($function, $size, $value...);
   }
 
   @error '#{$key} is not a valid ratio or function for adusting sizes.';

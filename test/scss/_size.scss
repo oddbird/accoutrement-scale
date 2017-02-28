@@ -105,34 +105,34 @@ $sizes: map-merge($sizes, $test-sizes);
 
 // Adjust Size [function]
 // ----------------------
-@include test-module('adjust-size [function]') {
+@include test-module('_ac-scale-adjust-size [function]') {
   @include test('Adjust units') {
     @include assert-equal(
-      _accoutrement-adjust-size(24px, 'convert-units', 'rem'),
+      _ac-scale-adjust-size(24px, 'convert-units', 'rem'),
       1.5rem);
   }
 
   @include test('Linear adjustment') {
     @include assert-equal(
-      _accoutrement-adjust-size(24px, 'linear', 3),
+      _ac-scale-adjust-size(24px, 'linear', 3),
       72px);
   }
 
   @include test('Explicit ratio adjustment') {
     @include assert-equal(
-      _accoutrement-adjust-size(24px, 1.5, 2),
+      _ac-scale-adjust-size(24px, 1.5, 2),
       54px);
   }
 
   @include test('Named ratio adjustment') {
     @include assert-equal(
-      _accoutrement-adjust-size(24px, 'fifth', 2),
+      _ac-scale-adjust-size(24px, 'fifth', 2),
       54px);
   }
 
   @include test('Arbitrary adjustment') {
     @include assert-equal(
-      _accoutrement-adjust-size(24px, '_plus-test-function', 2px),
+      _ac-scale-adjust-size(24px, '_plus-test-function', 2px),
       24px + 2px);
   }
 }
