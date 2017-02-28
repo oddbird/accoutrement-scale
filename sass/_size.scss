@@ -46,7 +46,7 @@
   }
 
   // Units
-  @if $unit and not index('ch' 'vw' 'vh' 'vmin', unit($size)) {
+  @if $unit {
     $size: convert-units($size, $unit);
   }
 

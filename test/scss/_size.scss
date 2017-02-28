@@ -5,6 +5,7 @@
 $test-sizes: (
   'big': 'text' ('fifth': 5),
   'small': 'text' ('octave': -1),
+  'viewport': 10vw,
 );
 
 $sizes: map-merge($sizes, $test-sizes);
@@ -60,6 +61,12 @@ $sizes: map-merge($sizes, $test-sizes);
     $expect: 24vmin;
     @include assert-equal($test, $expect,
       'Returns vmin size as given.');
+  }
+
+  @include test('Allow viewport units without warning') {
+    @include assert-equal(
+      size('viewport'),
+      10vw);
   }
 }
 
