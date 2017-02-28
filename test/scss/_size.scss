@@ -74,7 +74,7 @@ $sizes: map-merge($sizes, $test-sizes);
 @include test-module('square [mixin]') {
   @include test('Set height and width') {
     @include assert('Output height/width based on keyword') {
-      @include input {
+      @include output {
         @include square('h1');
       }
 

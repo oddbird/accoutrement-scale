@@ -26,7 +26,7 @@
 @include test-module('font-size [mixin]') {
   @include test('Implicit lines') {
     @include assert('Output sizes based on named scale and calculated lines') {
-      @include input {
+      @include output {
         @include font-size('h1');
       }
 
@@ -39,7 +39,7 @@
 
   @include test('Set font-size and line-height') {
     @include assert('Output sizes based on explicit size and lines') {
-      @include input {
+      @include output {
         @include font-size(24px, 3);
       }
 
@@ -52,7 +52,7 @@
 
   @include test('Add extra line-height') {
     @include assert('Line-height adjusted for extra space when equal to font') {
-      @include input {
+      @include output {
         @include font-size('rhythm');
       }
 
@@ -93,7 +93,7 @@ $sizes: map-merge($sizes, ('root': $_BROWSER-DEFAULT-FONT-SIZE));
 @include test-module('baseline [mixin]') {
   @include test('Set initial font-size and line-height') {
     @include assert('Output relative initial font-size and line-height') {
-      @include input {
+      @include output {
         @include baseline;
       }
 
