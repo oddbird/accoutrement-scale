@@ -17,7 +17,7 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {String} $unit [$default-units] -
+/// @param {String} $unit [null] -
 ///   The desired units for the output (e.g. `px` or `rem`).
 /// @throw -
 ///   The calculated value is not a valid CSS length.
@@ -25,7 +25,7 @@
 ///   The calculated length, in the requested units.
 @function size(
   $size,
-  $unit: $default-units
+  $unit: null
 ) {
   // Parse arguments
   $size: map-get($sizes, $size) or $size;
@@ -36,14 +36,8 @@
   $size: if(map-has-key($sizes, $base), size($base, false), $base);
 
   // Adjustments
-  @each $ratio, $value in $adjust {
-    $ratio: _get-ratio($ratio);
-    @if $ratio == 'linear' {
-      $size: $size * $value;
-    } @else {
-      $multiplier: _accoutrement-pow($ratio, $value);
-      $size: round($size * $multiplier);
-    }
+  @each $key, $value in $adjust {
+    $size: _ac-scale-adjust-size($size, $key, $value);
   }
 
   // Validation
@@ -52,7 +46,7 @@
   }
 
   // Units
-  @if $unit and not index('ch' 'vw' 'vh' 'vmin', unit($size)) {
+  @if $unit {
     $size: convert-units($size, $unit);
   }
 
@@ -76,13 +70,13 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {String} $unit [$default-units] -
+/// @param {String} $unit [null] -
 ///   The desired units for the output (e.g. `px` or `rem`).
 /// @return {Length} -
 ///   The calculated negative length, in the requested units.
 @function negative(
   $size,
-  $unit: $default-units
+  $unit: null
 ) {
   @return 0 - size($size, $unit);
 }
@@ -103,17 +97,61 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {String} $unit [$default-units] -
+/// @param {String} $unit [null] -
 ///   The desired units for the output (e.g. `px` or `rem`).
 /// @output -
 ///   Equal CSS height and width properties,
 ///   set to the given size and units.
 @mixin square(
   $size,
-  $unit: $default-units
+  $unit: null
 ) {
   $size: size($size, $unit);
 
   height: $size;
   width: $size;
 }
+
+
+
+// Adjust Size
+// ===========
+/// Calculate ratio, linear, or arbitrary adjustments
+/// to a base size.
+///
+/// @access private
+///
+/// @param {Number} $size -
+///   The original size to perform adjusments on
+/// @param {String | Number} $key -
+///   The adjustment to perform,
+///   given as either a numeric ratio,
+///   named ratio keyword,
+///   or function name to call.
+/// @param {Any} $value -
+///   Any required adjustment arguments,
+///   such as the number of times to apply a ratio,
+///   or additional arguments to be passed to a function.
+/// @return {Number} -
+///   Results of the adjustment.
+@function _ac-scale-adjust-size(
+  $size,
+  $key,
+  $value
+) {
+  $ratio: _get-ratio($key);
+
+  @if $ratio == 'linear' {
+    @return $size * $value;
+  } @else if (type-of($ratio) == 'number') {
+    $multiplier: _accoutrement-pow($ratio, $value);
+    @return $size * $multiplier;
+  } @else if (type-of($key) == 'function') or function-exists($key) {
+    $function: _ac-scale-get-function($key);
+    @return call($function, $size, $value...);
+  }
+
+  @error '#{$key} is not a valid ratio or function for adusting sizes.';
+}
+
+

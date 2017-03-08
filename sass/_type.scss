@@ -19,8 +19,13 @@
   $size: 'root',
   $rhythm: 'rhythm'
 ) {
-  $font-size: size($size, 'px');
-  $line-height: size($rhythm, 'px');
+  $font-size: size($size);
+  $line-height: size($rhythm);
+
+  @if (not comparable($font-size, $line-height)) {
+    $font-size: convert-units($font-size, 'px');
+    $line-height: convert-units($line-height, 'px');
+  }
 
   @return ceil(2 * $font-size / $line-height) / 2;
 }
