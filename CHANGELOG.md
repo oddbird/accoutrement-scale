@@ -13,4 +13,4 @@ Accoutrement-Scale Changelog
   e.g. `'my-size': 24px ('add': 12px)`,
   where `add` is an available function
   that will accept `24px, 12px` as arguments.
-- Support first-class functions in Sass 3.5 (I hope).
+- Support first-class functions in Sass 3.5.

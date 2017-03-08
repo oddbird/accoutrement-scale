@@ -1,6 +1,6 @@
 {
   "name": "accoutrement-scale",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0",
   "description": "Size and scale helpers for typography and layout.",
   "homepage": "https://github.com/oddbird/accoutrement-scale",
   "repository": {

@@ -146,7 +146,7 @@
   } @else if (type-of($ratio) == 'number') {
     $multiplier: _accoutrement-pow($ratio, $value);
     @return $size * $multiplier;
-  } @else if function-exists($key) {
+  } @else if (type-of($key) == 'function') or function-exists($key) {
     $function: _ac-scale-get-function($key);
     @return call($function, $size, $value...);
   }

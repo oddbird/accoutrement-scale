@@ -8,6 +8,12 @@
 
   @if function-exists('get-function') {
     $expect: get-function('size');
+
+    @include test('Functions are returned without change') {
+      @include assert-equal(
+        _ac-scale-get-function($expect),
+        $expect);
+    }
   }
 
   @include test('Returns a function or function-name') {

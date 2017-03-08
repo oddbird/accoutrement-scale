@@ -1,12 +1,13 @@
 accoutrement-scale
 ==================
 
-Sass typography [Accoutrement][accoutrement]
-by [OddBird][oddbird].
-Sass size & scale management tools.
-Generate sizes based on [modular scales][ms],
-gather all your sizes into a single map,
-and access them by name in various ways.
+Sass size & scale management tools
+by [OddBird][oddbird],
+part of our [Accoutrement][accoutrement] suite.
+Gather all your sizes into a single map,
+generate new sizes based on [modular scales][ms]
+or arbitrary functions,
+and access them by name.
 
 [accoutrement]: http://oddbird.net/accoutrement/
 [oddbird]: http://oddbird.net/
