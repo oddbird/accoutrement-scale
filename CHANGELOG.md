@@ -2,7 +2,7 @@ Accoutrement-Scale Changelog
 ============================
 
 
-3.0.0 - 02/29/17
+3.0.0 - 03/08/17
 ----------------
 - BREAKING: Don't convert units unless specifically requested.
   This allows you to define preferred units per-item
