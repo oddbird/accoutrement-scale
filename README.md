@@ -42,7 +42,7 @@ $sizes: (
   'h2': 'root' ('my-ratio': 2),
   'h3': 'root' ('my-ratio': 1),
 
-  'page': '8in',
+  'page': 8in,
 );
 ```
 
