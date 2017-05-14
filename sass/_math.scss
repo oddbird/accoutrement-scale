@@ -51,3 +51,23 @@
 
   @return $_return;
 }
+
+
+// Plus
+// ----
+@function plus(
+  $size1,
+  $size2
+) {
+  @return size($size1) + size($size2);
+}
+
+
+// Minus
+// -----
+@function minus(
+  $size1,
+  $size2
+) {
+  @return size($size1) - size($size2);
+}
