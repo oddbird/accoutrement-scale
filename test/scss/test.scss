@@ -28,6 +28,9 @@ $test-sizes: (
   'times-name': 'root' ('times': 'test-value'),
   'multiply-name': 'root' ('multiply': 'test-value'),
   'divide-name': 'root' ('divide': 'test-value'),
+
+  'calc-simple': calc(1em + 2vw),
+  'calc': 'calc(%s + %s / %s)' ('root' ('times': 3), 'test-value' ('convert-units': 'vw'), 3),
 );
 
 $sizes: map-merge($sizes, $test-sizes);

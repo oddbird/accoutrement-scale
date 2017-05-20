@@ -75,6 +75,18 @@ $sizes: map-merge($sizes, $test-sizes);
       size('percent'),
       20%);
   }
+
+  @include test('Allow simple calc values') {
+    @include assert-equal(
+      size('calc-simple'),
+      calc(1em + 2vw));
+  }
+
+  @include test('Allow compiled calc values') {
+    @include assert-equal(
+      size('calc'),
+      calc(48px + 2vw / 3));
+  }
 }
 
 

@@ -13,7 +13,9 @@
 ///   The name of a size in your configuration (e.g. `line-height`),
 ///   or a length to be converted into different units (e.g. `24px`),
 ///   or a base-size and adjustments to be made
-///   (e.g. `24px ('minor-third': 2)`).
+///   (e.g. `24px ('minor-third': 2)`),
+///   or a `calc(%s + %s) ('root', 'rhythm')` recipie
+///   for building `calc` values.
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
@@ -30,28 +32,40 @@
   // Parse arguments
   $size: map-get($sizes, $size) or $size;
   $base: nth($size, 1);
-  $adjust: if(length($size) > 1, nth($size, 2), ());
+  $adjust: if(length($size) > 1, nth($size, 2), null);
+
 
   // Recursive check
   $size: if(map-has-key($sizes, $base), size($base, false), $base);
 
+
   // Adjustments
-  @each $key, $value in $adjust {
-    $size: _ac-scale-adjust-size($size, $key, $value);
+  $base-type: type-of($base);
+  $adjust-type: type-of($adjust);
+  $calc: ($base-type == 'string') and (str-slice($base, 1, 5) == 'calc(');
+
+  @if ($adjust-type == 'map') {
+    @each $key, $value in $adjust {
+      $size: _ac-scale-adjust-size($size, $key, $value);
+    }
+  } @else if ($adjust-type == 'list') {
+    $values: ();
+
+    @each $value in $adjust {
+      $values: append($values, size($value));
+    }
+
+    $size: _ac-interpolate($base, $values...);
   }
+
 
   // Validation
-  @if type-of($size) != 'number' {
-    @error '#{$size} is not a valid length for CSS.';
+  @if (type-of($size) == 'number') or $calc {
+    $size: if($unit, convert-units($size, $unit), $size);
+    @return $size;
   }
 
-  // Units
-  @if $unit {
-    $size: convert-units($size, $unit);
-  }
-
-  // Return
-  @return $size;
+  @error '#{$size} is not a valid length for CSS.';
 }
 
 

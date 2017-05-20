@@ -37,3 +37,88 @@
 
   @error 'Invalid function-name, [#{$type}] `#{$function}` must be a function or string';
 }
+
+
+// Format String
+// -------------
+/// Define your own format-string
+/// for building `calc(%s + %s) ('root', 'rhythm')` recipies.
+///
+/// @group config
+/// @type string
+///
+/// @example scss -
+///   $ac-format-string: '@@@';
+$ac-format-string: '%s';
+
+
+// String Replace
+// --------------
+/// Return a string, with a substring replaced
+///
+/// @access private
+///
+/// @param {string} $string -
+///   The original string to be edited
+/// @param {string} $old -
+///   A sub-string to replace
+/// @param {string} $new -
+///   A new sub-string to replace the old
+/// @return {string} -
+///   Original string, with substring replaced
+@function _ac-str-replace(
+  $string,
+  $old,
+  $new: null,
+  $replace-all: false
+) {
+  $return: $string;
+  $i: str-index($string, $old);
+  $n: str-length($old);
+
+  @if $string == $old {
+    $return: $new;
+  } @else if $i {
+    $a: if($i > 1, str-slice($string, 1, $i - 1), '');
+    $z: str-slice($string, $i + $n);
+
+    @if $replace-all {
+      $z: _ac-str-replace($z, $old, $new, true);
+    }
+
+    $return: $a + if($new, $new, '') + $z;
+  }
+
+  @return $return;
+}
+
+
+// Interpolate
+// -----------
+/// Return a string with interpolated values
+/// replacing `%s` format strings
+///
+/// @access private
+///
+/// @param {string} $string -
+///   The original string to be edited
+/// @param {strings} $values... -
+///   New strings, to replace the `%s` format strings
+/// @return {string} -
+///   Original string, with `%s` format strings replaced
+@function _ac-interpolate(
+  $string,
+  $values...
+) {
+  $_return: $string;
+
+  @each $val in $values {
+    @if str-index($_return, $ac-format-string) {
+      $_return: _ac-str-replace($_return, $ac-format-string, $val);
+    } @else {
+      @warn 'Too many values passed for interpolation with "#{$string}".';
+    }
+  }
+
+  @return $_return;
+}

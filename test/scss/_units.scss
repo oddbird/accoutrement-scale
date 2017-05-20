@@ -2,69 +2,97 @@
 // ==========
 
 
+// Get Number
+// ----------
+@include test-module('get-number [function]') {
+  @include test('Absolute') {
+    @include assert-equal(
+      _get-number('px'),
+      0px);
+  }
+
+  @include test('Not Absolute') {
+    @include assert-false(_get-number('ch'));
+  }
+
+  @include test('Relative') {
+    @include assert-equal(
+      _get-number('ch', 'relative'),
+      0ch);
+  }
+
+  @include test('Not Known') {
+    @include assert-false(_get-number('wtf'));
+  }
+}
+
+
 // Convert Length
 // --------------
 @include test-module('convert-units [function]') {
   @include test('No conversion for equal units') {
     @include assert-equal(
       convert-units(6em, 'em'),
-      6em,
-      'Return length directly when from- and to- units match.');
+      6em);
   }
 
   @include test('Convert px to em') {
     @include assert-equal(
       convert-units(16px, 'em'),
-      1em,
-      'Returns em length from px input.');
+      1em);
   }
 
   @include test('Convert px to %') {
     @include assert-equal(
       convert-units(16px, '%', $to-context: 1600px),
-      1%,
-      'Returns % conversion from px.');
+      1%);
   }
 
   @include test('Convert em to %') {
     @include assert-equal(
       convert-units(1.35em, '%', $to-context: 600px),
-      3.6%,
-      'Returns % conversion from em.');
+      3.6%);
   }
 
   @include test('Convert px to ex') {
     @include assert-equal(
       convert-units(16px, 'ex'),
-      2ex,
-      'Returns ex conversion from px.');
+      2ex);
   }
 
   @include test('Convert % to px') {
     @include assert-equal(
       convert-units(150%, 'px', 18px),
-      27px,
-      'Returns px conversion from %.');
+      27px);
   }
 
   @include test('Convert px to rem') {
     @include assert-equal(
       convert-units(1px, 'rem'),
-      0.0625rem,
-      'Returns rem conversion from px.');
+      0.0625rem);
   }
 
   @include test('Convert em to mm') {
     @include assert-equal(
       convert-units(2em, 'mm', 18px),
-      9.525mm,
-      'Returns mm conversion from em.');
+      9.525mm);
   }
 
   @include test('Convert rem to px') {
     @include assert-equal(
       convert-units(1rem, 'px'),
-      16px,
-      'Returns px conversion from rem.');
+      16px);
+  }
+
+  @include test('Convert to nothing') {
+    @include assert-equal(
+      convert-units(16vw, ''),
+      16);
+  }
+
+  @include test('Convert nothing to vw') {
+    @include assert-equal(
+      convert-units(16, 'vw'),
+      16vw);
   }
 }

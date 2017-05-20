@@ -2,6 +2,8 @@
 // ==============
 
 
+// Get Function
+// ------------
 @include test-module('Get Function [function]') {
   $test: _ac-scale-get-function('size');
   $expect: 'size';
@@ -24,5 +26,56 @@
     @include assert-equal(
       call($test, 'root'),
       size('root'));
+  }
+}
+
+
+// String Replace
+// --------------
+@include test-module('str-replace [function]') {
+
+  @include test('Replacing a sub-string with another string') {
+    $test: _ac-str-replace('hello terrible world!', 'terrible', 'beautiful');
+    $expect: 'hello beautiful world!';
+    @include assert-equal($test, $expect,
+      'Substring should be replaced within larger string');
+  }
+
+  @include test('Replacing a full string') {
+    $test: _ac-str-replace('hello', 'hello', 'world');
+    $expect: 'world';
+    @include assert-equal($test, $expect,
+      'Full string should be replaced');
+  }
+
+  @include test('Replacing a sub-string with nothing') {
+    $test: _ac-str-replace('hello world', 'hello ', false);
+    $expect: 'world';
+    @include assert-equal($test, $expect,
+      'Replacing a string with false should remove it entirely');
+
+    $test: _ac-str-replace('hello world', 'hello ', null);
+    $expect: 'world';
+    @include assert-equal($test, $expect,
+      'Replacing a string with null should remove it entirely');
+  }
+
+  @include test('Replacing all instances of a sub-string') {
+    @include assert-equal(
+      _ac-str-replace('hello world', 'o', '000', true),
+      'hell000 w000rld',
+      'All instances can be replaced at once');
+  }
+}
+
+
+// Interpolate
+// -----------
+@include test-module('interpolate [function]') {
+  @include test('Replace any number of interpolation strings with values') {
+    $test: _ac-interpolate('hello %s%s', 'world', '!');
+    $expect: 'hello world!';
+    @include assert-equal($test, $expect,
+      'All format strings should be replaced by interpolation values.');
   }
 }
