@@ -57,6 +57,13 @@ $sizes: map-merge($sizes, $test-sizes);
       'Returns size converted from explicit length.');
   }
 
+  @include test('Get rounded size') {
+    @include assert-equal(
+      size('round'),
+      3rem,
+      'Returns size converted from explicit length.');
+  }
+
   @include test('Dont adjust non-comparable units') {
     $test: size(24vmin);
     $expect: 24vmin;
@@ -160,5 +167,11 @@ $sizes: map-merge($sizes, $test-sizes);
     @include assert-equal(
       _ac-scale-adjust-size(24px, '_plus-test-function', 2px),
       24px + 2px);
+  }
+
+  @include test('Single-argument adjustment, with null') {
+    @include assert-equal(
+      _ac-scale-adjust-size(10px / 3, 'round', null),
+      3px);
   }
 }

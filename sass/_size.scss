@@ -162,7 +162,8 @@
     @return $size * $multiplier;
   } @else if (type-of($key) == 'function') or function-exists($key) {
     $function: _ac-scale-get-function($key);
-    @return call($function, $size, $value...);
+    $args: if($value, ($size, $value), $size);
+    @return call($function, $args...);
   }
 
   @error '#{$key} is not a valid ratio or function for adusting sizes.';

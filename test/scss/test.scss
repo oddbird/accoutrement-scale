@@ -29,6 +29,7 @@ $test-sizes: (
   'multiply-name': 'root' ('multiply': 'test-value'),
   'divide-name': 'root' ('divide': 'test-value'),
 
+  'round': 10rem / 3 ('round': null),
   'calc-simple': calc(1em + 2vw),
   'calc': 'calc(%s + %s / %s)' ('root' ('times': 3), 'test-value' ('convert-units': 'vw'), 3),
 );

@@ -7,7 +7,10 @@ Accoutrement-Scale Changelog
 - Allow `calc()` values in scale maps
 - Add `calc(%s + %s) ('root', 'rhythm')` syntax
   for building custom calc functions based on other map values
-- Add math functions:
+- Support single-argument adjustment functions
+  by passing `null` to the arglist,
+  e.g. `'size-name': 10rem / 3 ('round': null)`
+- Include basic math functions:
   `add`/`plus`, `minus`/`subtract`, `times`/`multiply`, and `divide` –
   for use in scale maps, e.g. `'new-size': 'size1' ('add': 'size2')`
 
