@@ -1,9 +1,39 @@
 // Scale Tests
 // ===========
 
+
+// Imports
 @import '../../node_modules/sass-true/sass/true';
 @import '../../sass/scale';
 
+
+// Config
+$ratios: ('new': 'octave');
+
+$test-sizes: (
+  'add-number': 3em ('add': 4),
+  'plus-number': 30px ('plus': 4in),
+  'minus-number': 3em ('minus': 1),
+  'subtract-number': 30px ('subtract': 0.25in),
+  'times-number': 3em ('times': 1),
+  'multiply-number': 30px ('multiply': 1.25),
+  'divide-number': 3em ('divide': 2),
+
+  'test-value': 2,
+
+  'add-name': 'root' ('add': 'test-value'),
+  'plus-name': 'root' ('plus': 'test-value'),
+  'minus-name': 'root' ('minus': 'test-value'),
+  'subtract-name': 'root' ('subtract': 'test-value'),
+  'times-name': 'root' ('times': 'test-value'),
+  'multiply-name': 'root' ('multiply': 'test-value'),
+  'divide-name': 'root' ('divide': 'test-value'),
+);
+
+$sizes: map-merge($sizes, $test-sizes);
+
+
+// Tests
 @import 'utility';
 @import 'config';
 @import 'math';
@@ -11,4 +41,6 @@
 @import 'size';
 @import 'type';
 
+
+// Report
 @include report;

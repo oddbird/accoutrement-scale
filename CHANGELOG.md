@@ -2,6 +2,13 @@ Accoutrement-Scale Changelog
 ============================
 
 
+3.1.0 - UNRELEASED
+------------------
+- Add math functions:
+  `add`/`plus`, `minus`/`subtract`, `times`/`multiply`, and `divide` –
+  for use in scale maps, e.g. `'new-size': 'size1' ('add': 'size2')`
+
+
 3.0.0 - 03/08/17
 ----------------
 - BREAKING: Don't convert units unless specifically requested.
