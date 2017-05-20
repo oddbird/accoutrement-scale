@@ -13,6 +13,8 @@ Accoutrement-Scale Changelog
 - Include basic math functions:
   `add`/`plus`, `minus`/`subtract`, `times`/`multiply`, and `divide` –
   for use in scale maps, e.g. `'new-size': 'size1' ('add': 'size2')`
+- Fix `safe-get-function` to expect first-class functions
+  from external sources, and get local ones
 
 
 3.0.0 - 03/08/17
