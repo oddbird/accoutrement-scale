@@ -34,21 +34,18 @@
   $base: nth($size, 1);
   $adjust: if(length($size) > 1, nth($size, 2), null);
 
-
   // Recursive check
   $size: if(map-has-key($sizes, $base), size($base, false), $base);
 
-
   // Adjustments
-  $base-type: type-of($base);
   $adjust-type: type-of($adjust);
-  $calc: ($base-type == 'string') and (str-slice($base, 1, 5) == 'calc(');
+  $calc: (type-of($size) == 'string') and (str-slice($size, 1, 5) == 'calc(');
 
-  @if ($adjust-type == 'map') {
+  @if (not $calc) and ($adjust-type == 'map') {
     @each $key, $value in $adjust {
       $size: _ac-scale-adjust-size($size, $key, $value);
     }
-  } @else if ($adjust-type == 'list') {
+  } @else if $calc and ($adjust-type == 'list') {
     $values: ();
 
     @each $value in $adjust {

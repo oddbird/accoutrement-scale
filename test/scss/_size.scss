@@ -94,6 +94,12 @@ $sizes: map-merge($sizes, $test-sizes);
       size('calc'),
       calc(48px + 2vw / 3));
   }
+
+  @include test('Allow calc references') {
+    @include assert-equal(
+      size('calc-ref'),
+      calc(48px + 2vw / 3));
+  }
 }
 
 
