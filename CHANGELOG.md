@@ -2,6 +2,11 @@ Accoutrement-Scale Changelog
 ============================
 
 
+3.1.1 - 05/27/17
+----------------
+- BUGFIX: Resolve problems with referencing `calc()` values
+
+
 3.1.0 - 05/20/17
 ----------------
 - Allow `calc()` values in scale maps
