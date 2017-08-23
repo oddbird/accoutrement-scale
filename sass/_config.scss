@@ -54,32 +54,6 @@ $_DEFAULT-RATIOS: (
 $ratios: () !default;
 
 
-// Get Ratio
-// ---------
-/// Retrieve a ratio by name
-/// from either the `$_DEFAULT-RATIOS`
-/// or user `$ratios` configurations.
-///
-/// @access private
-///
-/// @param {String | Number} $ratio -
-///   The key-name or value of a ratio
-/// @return {Number} -
-///   The numeric value of a ratio
-@function _get-ratio(
-  $ratio
-) {
-  $_ratio-options: map-merge($_DEFAULT-RATIOS, $ratios);
-  $_new-ratio: map-get($_ratio-options, $ratio) or $ratio;
-
-  @if ($ratio != $_new-ratio) and map-has-key($_ratio-options, $_new-ratio) {
-    $_new-ratio: _get-ratio($_new-ratio);
-  }
-
-  @return $_new-ratio;
-}
-
-
 // Sizes
 // -----
 /// Defined a palette of common sizes to be used across your project,

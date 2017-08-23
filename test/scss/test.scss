@@ -40,7 +40,6 @@ $sizes: map-merge($sizes, $test-sizes);
 
 // Tests
 @import 'utility';
-@import 'config';
 @import 'math';
 @import 'units';
 @import 'size';

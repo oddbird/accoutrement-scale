@@ -2,6 +2,12 @@ Accoutrement-Scale Changelog
 ============================
 
 
+3.2.1 - UNRELEASED
+------------------
+- NEW: Rename private `_get-ratio()` to public `scale()`
+  for consistent access to ratios with map-key references.
+
+
 3.1.1 - 05/27/17
 ----------------
 - BUGFIX: Resolve problems with referencing `calc()` values

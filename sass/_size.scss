@@ -93,6 +93,35 @@
 }
 
 
+// Scale [function]
+// ----------------
+/// Retrieve a scale ratio by name
+/// from either the `$_DEFAULT-RATIOS`
+/// or user `$ratios` configurations.
+///
+/// @group sizes
+///
+/// @param {String | Number} $ratio -
+///   The key-name or value of a ratio
+/// @return {Number} -
+///   The numeric value of a ratio
+/// @example scss
+///   /* Octave: #{scale('octave')} */
+///   /* Fifth: #{scale('fifth')} */
+@function scale(
+  $ratio
+) {
+  $_ratio-options: map-merge($_DEFAULT-RATIOS, $ratios);
+  $_new-ratio: map-get($_ratio-options, $ratio) or $ratio;
+
+  @if ($ratio != $_new-ratio) and map-has-key($_ratio-options, $_new-ratio) {
+    $_new-ratio: scale($_new-ratio);
+  }
+
+  @return $_new-ratio;
+}
+
+
 // Square [mixin]
 // --------------
 /// Create a square by setting equal CSS `height` and `width` properties
@@ -150,7 +179,7 @@
   $key,
   $value
 ) {
-  $ratio: _get-ratio($key);
+  $ratio: scale($key);
 
   @if $ratio == 'linear' {
     @return $size * $value;

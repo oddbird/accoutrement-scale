@@ -103,6 +103,32 @@ $sizes: map-merge($sizes, $test-sizes);
 }
 
 
+// Scale [function]
+// ----------------
+@include test-module('scale [function]') {
+  @include test('Named ratio') {
+    @include assert-equal(
+      scale('fifth'),
+      3/2,
+      'Returns a ratio based on keyword.');
+  }
+
+  @include test('Linear ratio') {
+    @include assert-equal(
+      scale('linear'),
+      'linear',
+      'Returns a linear ratio unchanged.');
+  }
+
+  @include test('Recursive ratio') {
+    @include assert-equal(
+      scale('new'),
+      scale('octave'),
+      'Returns a recursizely named ratio.');
+  }
+}
+
+
 // Negative [function]
 // -------------------
 @include test-module('negative [function]') {
