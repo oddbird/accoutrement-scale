@@ -4,6 +4,9 @@ Accoutrement-Scale Changelog
 4.0.0 - UNRELEASED
 ------------------
 
+- BREAKING: Remove overly-opinionated baseline type tools
+  including `font-size` and `baseline` mixins.
+  These settings are more clear when established explicitly in CSS.
 - BREAKING: Remove stand-alone `browser-ems()` function…
 - NEW: Allow `browser-ems` as a `$to-unit` argument
   in the `contert-units()` function.
