@@ -65,7 +65,10 @@
 
 // Convert Units [function]
 // ------------------------
-/// Convert lengths between most units.
+/// Convert lengths between comparable units.
+/// You can also convert to `browser-ems`,
+/// relative to the browser default rather than the site root –
+/// useful for media-quesries.
 ///
 /// @group units
 ///
@@ -91,6 +94,12 @@
 ) {
   $_convertable: ('in', 'mm', 'cm', 'pt', 'pc', 'px', 'em', 'rem', '%', 'ex');
   $from-unit: unit($length);
+
+  // Special conversion for browser-default ems (needed in media-queries)
+  @if ($to-unit == 'browser-ems') {
+    $size: size($length, 'px');
+    @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
+  }
 
   // Optimize for cases where `from` and `to` units are accidentally the same.
   @if $from-unit == $to-unit {

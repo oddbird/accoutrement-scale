@@ -2,19 +2,19 @@
   "name": "accoutrement-scale",
   "version": "3.2.0",
   "description": "Size and scale helpers for typography and layout.",
-  "homepage": "https://github.com/oddbird/accoutrement-scale",
+  "homepage": "http://oddbird.net/accoutrement-scale/",
   "repository": {
     "type": "git",
     "url": "git://github.com/oddbird/accoutrement-scale.git"
   },
   "devDependencies": {
-    "chalk": "^1.1.1",
+    "chalk": "^2.1.0",
     "gulp": "^3.9.1",
-    "gulp-sass-lint": "^1.3.2",
-    "gulp-util": "^3.0.7",
-    "mathsass": "^0.9.5",
-    "mocha": "^2.5.3",
-    "sass-true": "^2.2.2",
+    "gulp-sass-lint": "^1.3.3",
+    "gulp-util": "^3.0.8",
+    "mathsass": "^0.10.1",
+    "mocha": "^3.5.0",
+    "sass-true": "^3.0.0",
     "sassdoc": "^2.3.0",
     "sassdoc-theme-herman": "^1.0.0-alpha.9"
   },
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",
-    "release": "npm run test && gulp sasslint && gulp sassdoc"
+    "commit": "npm run test && gulp sasslint && gulp sassdoc"
   },
   "bugs": {
     "url": "https://github.com/oddbird/accoutrement-scale/issues"

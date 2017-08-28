@@ -30,6 +30,25 @@
 // Convert Length
 // --------------
 @include test-module('convert-units [function]') {
+  $old-scale: $sizes;
+  $sizes: map-merge($sizes, ('root': 20px)) !global;
+
+  @include test('Converts px size to browser em size') {
+    @include assert-equal(
+      convert-units(24px, 'browser-ems'),
+      1.5em,
+      'Convert px to root browser ems');
+  }
+
+  @include test('Converts rem size to browser em size') {
+    @include assert-equal(
+      convert-units(2rem, 'browser-ems'),
+      2.5em,
+      'Convert rem to root browser ems');
+  }
+
+  $sizes: $old-scale !global;
+
   @include test('No conversion for equal units') {
     @include assert-equal(
       convert-units(6em, 'em'),

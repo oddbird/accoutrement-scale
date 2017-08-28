@@ -1,6 +1,13 @@
 Accoutrement-Scale Changelog
 ============================
 
+4.0.0 - UNRELEASED
+------------------
+
+- BREAKING: Remove stand-alone `browser-ems()` function…
+- NEW: Allow `browser-ems` as a `$to-unit` argument
+  in the `contert-units()` function.
+
 
 3.2.0 - 08/23/17
 ----------------

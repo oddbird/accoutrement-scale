@@ -62,27 +62,6 @@
 }
 
 
-// Browser Ems [function]
-// ----------------------
-/// Convert any comparable size into browser-default ems
-/// usable in media-queries.
-///
-/// @group type
-///
-/// @param {String | Length | List} $size -
-///   The name, length, or calculations required
-///   for defining the font-size.
-/// @return {Length} -
-///   The given size, converted to `16px`-based `em` units.
-@function browser-ems(
-  $size
-) {
-  $size: size($size, 'px');
-
-  @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
-}
-
-
 // Baseline [mixin]
 // ----------------
 /// Set the root font-size as a percentage of the browser default,
