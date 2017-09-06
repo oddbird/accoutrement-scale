@@ -30,9 +30,10 @@
     "eyeglass-module"
   ],
   "eyeglass": {
-    "needs": "^0.8.2",
-    "sassDir": "./_mq.scss",
-    "exports": false
+    "sassDir": "sass",
+    "exports": false,
+    "name": "accoutrement-color",
+    "needs": "^1.0.0"
   },
   "scripts": {
     "test": "node_modules/.bin/mocha",

@@ -106,16 +106,16 @@
 /// @return {Number} -
 ///   The numeric value of a ratio
 /// @example scss
-///   /* Octave: #{scale('octave')} */
-///   /* Fifth: #{scale('fifth')} */
-@function scale(
+///   /* Octave: #{ratio('octave')} */
+///   /* Fifth: #{ratio('fifth')} */
+@function ratio(
   $ratio
 ) {
   $_ratio-options: map-merge($_DEFAULT-RATIOS, $ratios);
   $_new-ratio: map-get($_ratio-options, $ratio) or $ratio;
 
   @if ($ratio != $_new-ratio) and map-has-key($_ratio-options, $_new-ratio) {
-    $_new-ratio: scale($_new-ratio);
+    $_new-ratio: ratio($_new-ratio);
   }
 
   @return $_new-ratio;
@@ -179,12 +179,12 @@
   $key,
   $value
 ) {
-  $ratio: scale($key);
+  $ratio: ratio($key);
 
   @if $ratio == 'linear' {
     @return $size * $value;
   } @else if (type-of($ratio) == 'number') {
-    $multiplier: _accoutrement-pow($ratio, $value);
+    $multiplier: _acs-pow($ratio, $value);
     @return $size * $multiplier;
   } @else if (type-of($key) == 'function') or function-exists($key) {
     $function: _ac-scale-get-function($key);

@@ -6,10 +6,13 @@ Accoutrement-Scale Changelog
 
 - BREAKING: Remove overly-opinionated baseline type tools
   including `font-size` and `baseline` mixins.
-  These settings are more clear when established explicitly in CSS.
+  These settings are more clear when established explicitly in CSS
+- BREAKING: Rename `scale()` => `ratio()` to avoid conflicts with CSS
 - BREAKING: Remove stand-alone `browser-ems()` function…
 - NEW: Allow `browser-ems` as a `$to-unit` argument
   in the `contert-units()` function.
+- NEW: Add (private) `pow()` functions,
+  so that MathSass is no longer a dependency for non-integer steps
 
 
 3.2.0 - 08/23/17

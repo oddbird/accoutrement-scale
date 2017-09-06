@@ -2,58 +2,6 @@
 // ============
 
 
-// Pow
-// ---
-/// Access the [mathsass](https://github.com/terkel/mathsass)
-/// `pow()` function if it is available.
-/// Otherwise, fallback to simplified
-/// (integer-only) exponent calculation.
-///
-/// @access private
-/// @link https://github.com/terkel/mathsass
-///
-/// @param {number} $number -
-///   The base number to be multiplied.
-/// @param {number} $exponent -
-///   The exponent to use for multiplication.
-/// @throw -
-///   Please install the MathSass library for non-integer exponents.
-/// @return {number} -
-///   The calculated results of multiplying
-///   `$number` to the `$exponent` power
-@function _accoutrement-pow(
-  $number,
-  $exponent
-) {
-  // mathsass pow function
-  @if function-exists('pow') {
-    @return pow($number, $exponent);
-  }
-
-  @if round($exponent) != $exponent {
-    @error 'Please install the MathSass library for non-integer exponents.';
-  }
-
-  // Simple pow function fallback
-  $_return: 1;
-
-  @if $exponent == 0 {
-    @return $_return;
-  }
-
-  @for $i from 1 through abs($exponent) {
-    $_return: $_return * $number;
-  }
-
-  @if $exponent < 0 {
-    $_return: 1 / $_return;
-  }
-
-  @return $_return;
-}
-
-
-
 // Plus
 // ----
 /// Add two values together in a `$sizes` map.
