@@ -1,8 +1,8 @@
 Accoutrement-Scale Changelog
 ============================
 
-4.0.0 - UNRELEASED
-------------------
+4.0.0-alpha.1 - 09/06/17
+------------------------
 
 - BREAKING: Remove overly-opinionated baseline type tools
   including `font-size` and `baseline` mixins.
