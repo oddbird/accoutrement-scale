@@ -19,7 +19,7 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 /// or aliases for built-in ratios.
 ///
 /// @group config
-/// @type Map
+/// @type map
 $_DEFAULT-RATIOS: (
   'octave': 2,
   'major-seventh': 15 / 8,
@@ -43,7 +43,7 @@ $_DEFAULT-RATIOS: (
 /// or aliases for built-in ratios.
 ///
 /// @group config
-/// @type Map
+/// @type map
 ///
 /// @example scss -
 ///   $ratios: (
@@ -57,16 +57,17 @@ $ratios: () !default;
 // Sizes
 // -----
 /// Defined a palette of common sizes to be used across your project,
-/// in the format "name: size" or "name: basis (ratio: multiplier)".
+/// in the format "name: size" or "name: basis (ratio/function: value)".
 /// If your map includes a value for `root`,
 /// it will be used in relative-size unit conversions.
 ///
 /// @group config
-/// @type String
+/// @type map
 ///
 /// @property 'root' [16px] -
-///   The root font size for your document,
+///   Include a root font-size for your document,
 ///   used for calculating relative sizes.
+///   This should match the size applied to your html element.
 $sizes: (
   'root': $_BROWSER-DEFAULT-FONT-SIZE,
   'text': 'root' ('convert-units': 'rem'),

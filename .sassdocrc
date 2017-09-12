@@ -1,11 +1,17 @@
 theme: 'herman'
-dest: gh-pages/sassdoc
+dest: docs/
 
 display:
   access:
     - public
 
 groups:
-  config: configuration
-  util: utilities
-  contrast: contrast
+  config: Configuration
+  math: Math Functions
+  sizes: Accessing Sizes
+  units: Unit Conversion
+
+herman:
+  sass:
+    includepaths: ['sass']
+    includes: ['scale']
