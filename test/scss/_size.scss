@@ -47,6 +47,13 @@
     );
   }
 
+  @include it('Get unit-adjusted size with args') {
+    @include assert-equal(
+      size(24px, 'em', 10px),
+      2.4em
+    );
+  }
+
   @include it('Adjusted size with multiple arguments') {
     @include assert-equal(
       size('medium-page'),

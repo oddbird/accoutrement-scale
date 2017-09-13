@@ -6,6 +6,8 @@ Accoutrement-Scale Changelog
 ----------------
 - BREAKING: `$from-context` defaults to 'root' when available
 - BUGFIX: Browser-em math requires `$from-context`
+- NEW: Allow `size()` function to accept additional arguments
+  (e.g. `$from-context` and `$to-context`) for unit-conversion.
 
 
 4.0.2 - 09/13/17
