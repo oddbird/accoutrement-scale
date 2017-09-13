@@ -5,7 +5,7 @@
   "homepage": "http://oddbird.net/accoutrement-scale/",
   "repository": {
     "type": "git",
-    "url": "git://github.com/oddbird/accoutrement-scale.git"
+    "url": "https://github.com/oddbird/accoutrement-scale.git"
   },
   "devDependencies": {
     "chalk": "^2.1.0",
