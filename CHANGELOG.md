@@ -1,6 +1,10 @@
 Accoutrement-Scale Changelog
 ============================
 
+4.0.2 - 09/13/17
+----------------
+- Recompile styleguide documentation.
+
 4.0.1 - 09/13/17
 ----------------
 - Publish missing styleguide documentation.
