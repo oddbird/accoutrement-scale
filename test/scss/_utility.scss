@@ -4,27 +4,29 @@
 
 // Get Function
 // ------------
-@include test-module('Get Function [function]') {
+@include describe('Get Function [function]') {
   $test: _ac-scale-get-function('size');
-  $expect: 'size';
 
-  @include test('Returns a function or function-name') {
-    @include assert-equal($test, $expect);
+  @include it('Returns a function or function-name') {
+    @include assert-equal(
+      $test,
+      'size'
+    );
   }
 
-  @include test('Returned function or name is callable') {
+  @include it('Returned function or name is callable') {
     @include assert-equal(
       call($test, 'root'),
-      size('root'));
+      size('root')
+    );
   }
 
   @if function-exists('get-function') {
-    $expect: get-function('size');
-
-    @include test('Functions are returned without change') {
+    @include it('Functions are returned without change') {
       @include assert-equal(
-        _ac-scale-get-function($expect),
-        $expect);
+        _ac-scale-get-function('size'),
+        get-function('size')
+      );
     }
   }
 }
@@ -32,50 +34,49 @@
 
 // String Replace
 // --------------
-@include test-module('str-replace [function]') {
+@include describe('str-replace [function]') {
 
-  @include test('Replacing a sub-string with another string') {
-    $test: _ac-str-replace('hello terrible world!', 'terrible', 'beautiful');
-    $expect: 'hello beautiful world!';
-    @include assert-equal($test, $expect,
-      'Substring should be replaced within larger string');
+  @include it('Replacing a sub-string with another string') {
+    @include assert-equal(
+      _ac-str-replace('hello terrible world!', 'terrible', 'beautiful'),
+      'hello beautiful world!'
+    );
   }
 
-  @include test('Replacing a full string') {
-    $test: _ac-str-replace('hello', 'hello', 'world');
-    $expect: 'world';
-    @include assert-equal($test, $expect,
-      'Full string should be replaced');
+  @include it('Replacing a full string') {
+    @include assert-equal(
+      _ac-str-replace('hello', 'hello', 'world'),
+      'world'
+    );
   }
 
-  @include test('Replacing a sub-string with nothing') {
-    $test: _ac-str-replace('hello world', 'hello ', false);
-    $expect: 'world';
-    @include assert-equal($test, $expect,
-      'Replacing a string with false should remove it entirely');
+  @include it('Replacing a sub-string with nothing') {
+    @include assert-equal(
+      _ac-str-replace('hello world', 'hello ', false),
+      'world'
+    );
 
-    $test: _ac-str-replace('hello world', 'hello ', null);
-    $expect: 'world';
-    @include assert-equal($test, $expect,
-      'Replacing a string with null should remove it entirely');
+    @include assert-equal(
+      _ac-str-replace('hello world', 'hello ', null),
+      'world'
+    );
   }
 
-  @include test('Replacing all instances of a sub-string') {
+  @include it('Replacing all instances of a sub-string') {
     @include assert-equal(
       _ac-str-replace('hello world', 'o', '000', true),
-      'hell000 w000rld',
-      'All instances can be replaced at once');
+      'hell000 w000rld');
   }
 }
 
 
 // Interpolate
 // -----------
-@include test-module('interpolate [function]') {
-  @include test('Replace any number of interpolation strings with values') {
-    $test: _ac-interpolate('hello %s%s', 'world', '!');
-    $expect: 'hello world!';
-    @include assert-equal($test, $expect,
-      'All format strings should be replaced by interpolation values.');
+@include describe('interpolate [function]') {
+  @include it('Replace any number of interpolation strings with values') {
+    @include assert-equal(
+      _ac-interpolate('hello %s%s', 'world', '!'),
+      'hello world!'
+    );
   }
 }

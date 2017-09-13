@@ -11,6 +11,13 @@
 $ratios: ('new': 'octave');
 
 $test-sizes: (
+  'root': 20px,
+  'big': 'text' ('fifth': 5),
+  'small': 'text' ('octave': -1),
+  'viewport': 10vw,
+  'percent': 20%,
+  'medium-page': 30em ('convert-units': 'browser-ems' 40px),
+
   'add-number': 3em ('add': 4),
   'plus-number': 30px ('plus': 4in),
   'minus-number': 3em ('minus': 1),

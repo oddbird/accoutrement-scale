@@ -2,149 +2,151 @@
 // ===========
 
 
-$test-sizes: (
-  'big': 'text' ('fifth': 5),
-  'small': 'text' ('octave': -1),
-  'viewport': 10vw,
-  'percent': 20%,
-);
-
-$sizes: map-merge($sizes, $test-sizes);
-
-
 // Size [function]
 // ---------------
-@include test-module('size [function]') {
-  @include test('Get size from map setting') {
+@include describe('size [function]') {
+  @include it('Get size from map setting') {
     @include assert-equal(
       size('root'),
-      16px,
-      'Returns named size from $sizes map.');
+      20px
+    );
   }
 
-  @include test('Get size from unit adjustment') {
+  @include it('Get size from unit adjustment') {
     @include assert-equal(
       size('text'),
-      1rem,
-      'Returns size calculated from unit adjustment.');
+      1rem
+    );
   }
 
-  @include test('Get size from linear adjustment') {
+  @include it('Get size from linear adjustment') {
     @include assert-equal(
       size('h3'),
-      2rem,
-      'Returns size calculated from linear adjustment.');
+      2rem
+    );
   }
 
-  @include test('Get size from ratio adjustment') {
+  @include it('Get size from ratio adjustment') {
     @include assert-equal(
       size('big'),
-      7.59375rem,
-      'Returns size calculated from ratio adjustment.');
+      7.59375rem
+    );
   }
 
-  @include test('Get size from negative ratio') {
+  @include it('Get size from negative ratio') {
     @include assert-equal(
       size('small'),
-      0.5rem,
-      'Returns size calculated from negative ratio.');
+      0.5rem
+    );
   }
 
-  @include test('Get unit-adjusted size') {
+  @include it('Get unit-adjusted size') {
     @include assert-equal(
       size(24px, 'rem'),
-      1.5rem,
-      'Returns size converted from explicit length.');
+      1.2rem
+    );
   }
 
-  @include test('Get rounded size') {
+  @include it('Adjusted size with multiple arguments') {
+    @include assert-equal(
+      size('medium-page'),
+      75em
+    );
+  }
+
+  @include it('Get rounded size') {
     @include assert-equal(
       size('round'),
-      3rem,
-      'Returns size converted from explicit length.');
+      3rem
+    );
   }
 
-  @include test('Dont adjust non-comparable units') {
-    $test: size(24vmin);
-    $expect: 24vmin;
-    @include assert-equal($test, $expect,
-      'Returns vmin size as given.');
+  @include it('Dont adjust non-comparable units') {
+    @include assert-equal(
+      size(24vmin),
+      24vmin
+    );
   }
 
-  @include test('Allow viewport units without warning') {
+  @include it('Allow viewport units without warning') {
     @include assert-equal(
       size('viewport'),
-      10vw);
+      10vw
+    );
   }
 
-  @include test('Allow viewport units without warning') {
+  @include it('Allow viewport units without warning') {
     @include assert-equal(
       size('percent'),
-      20%);
+      20%
+    );
   }
 
-  @include test('Allow simple calc values') {
+  @include it('Allow simple calc values') {
     @include assert-equal(
       size('calc-simple'),
-      calc(1em + 2vw));
+      calc(1em + 2vw)
+    );
   }
 
-  @include test('Allow compiled calc values') {
+  @include it('Allow compiled calc values') {
     @include assert-equal(
       size('calc'),
-      calc(48px + 2vw / 3));
+      calc(60px + 2vw / 3)
+    );
   }
 
-  @include test('Allow calc references') {
+  @include it('Allow calc references') {
     @include assert-equal(
       size('calc-ref'),
-      calc(48px + 2vw / 3));
+      calc(60px + 2vw / 3)
+    );
   }
 }
 
 
 // Scale [function]
 // ----------------
-@include test-module('scale [function]') {
-  @include test('Named ratio') {
+@include describe('scale [function]') {
+  @include it('Named ratio') {
     @include assert-equal(
       ratio('fifth'),
-      3/2,
-      'Returns a ratio based on keyword.');
+      3/2
+    );
   }
 
-  @include test('Linear ratio') {
+  @include it('Linear ratio') {
     @include assert-equal(
       ratio('linear'),
-      'linear',
-      'Returns a linear ratio unchanged.');
+      'linear'
+    );
   }
 
-  @include test('Recursive ratio') {
+  @include it('Recursive ratio') {
     @include assert-equal(
       ratio('new'),
-      ratio('octave'),
-      'Returns a recursizely named ratio.');
+      ratio('octave')
+    );
   }
 }
 
 
 // Negative [function]
 // -------------------
-@include test-module('negative [function]') {
-  @include test('Get negative size') {
+@include describe('negative [function]') {
+  @include it('Get negative size') {
     @include assert-equal(
       negative('rhythm'),
-      0 - size('rhythm'),
-      'Returns a keyword size, subtracted from zero.');
+      0 - size('rhythm')
+    );
   }
 }
 
 
 // Square [mixin]
 // --------------
-@include test-module('square [mixin]') {
-  @include test('Set height and width') {
+@include describe('square [mixin]') {
+  @include it('Set height and width') {
     @include assert('Output height/width based on keyword') {
       @include output {
         @include square('h1');
@@ -170,40 +172,46 @@ $sizes: map-merge($sizes, $test-sizes);
 
 // Adjust Size [function]
 // ----------------------
-@include test-module('_ac-scale-adjust-size [function]') {
-  @include test('Adjust units') {
+@include describe('_ac-scale-adjust-size [function]') {
+  @include it('Adjust units') {
     @include assert-equal(
-      _ac-scale-adjust-size(24px, 'convert-units', 'rem'),
-      1.5rem);
+      _ac-scale-adjust-size(30px, 'convert-units', 'rem'),
+      1.5rem
+    );
   }
 
-  @include test('Linear adjustment') {
+  @include it('Linear adjustment') {
     @include assert-equal(
       _ac-scale-adjust-size(24px, 'linear', 3),
-      72px);
+      72px
+    );
   }
 
-  @include test('Explicit ratio adjustment') {
+  @include it('Explicit ratio adjustment') {
     @include assert-equal(
       _ac-scale-adjust-size(24px, 1.5, 2),
-      54px);
+      54px
+    );
   }
 
-  @include test('Named ratio adjustment') {
+  @include it('Named ratio adjustment') {
     @include assert-equal(
       _ac-scale-adjust-size(24px, 'fifth', 2),
-      54px);
+      54px
+    );
   }
 
-  @include test('Arbitrary adjustment') {
+  @include it('Arbitrary adjustment') {
     @include assert-equal(
       _ac-scale-adjust-size(24px, '_plus-test-function', 2px),
-      24px + 2px);
+      24px + 2px
+    );
   }
 
-  @include test('Single-argument adjustment, with null') {
+  @include it('Single-argument adjustment, with null') {
     @include assert-equal(
       _ac-scale-adjust-size(10px / 3, 'round', null),
-      3px);
+      3px
+    );
   }
 }

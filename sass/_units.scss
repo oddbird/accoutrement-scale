@@ -8,9 +8,9 @@
 ///
 /// @access private
 ///
-/// @param {Number} $length -
+/// @param {number} $length -
 ///   The number to be converted to px if comparable.
-/// @return {Number | false} -
+/// @return {number | false} -
 ///   Either the `px` value of the converted `$length` or `false`.
 @function _get-px(
   $length
@@ -25,9 +25,9 @@
 ///
 /// @access private
 ///
-/// @param {String} $unit -
+/// @param {string} $unit -
 ///   The unit to return as a number.
-/// @return {Number | false} -
+/// @return {number | false} -
 ///   Either the `0` value of a unit or `false`.
 @function _get-number(
   $unit,
@@ -72,24 +72,24 @@
 ///
 /// @group units
 ///
-/// @param {Number} $length -
+/// @param {number} $length -
 ///   The length to be converted
-/// @param {String} $to-unit -
+/// @param {string} $to-unit -
 ///   The desired units to convert to.
 ///   Some units (`ch`, `vw`, `vh`, `vmin`, `vmax`) cannot be converted.
-/// @param {Number} $from-context [$_BROWSER-DEFAULT-FONT-SIZE] -
+/// @param {number} $from-context ['root' setting or 16px] -
 ///   When converting from relative units,
 ///   the absolute length (in px) to which $length refers -
 ///   e.g. for `$lengths` in em units, would normally be the
 ///   font-size of the current element.
-/// @param {Number} $to-context [$from-context] -
+/// @param {number} $to-context [$from-context] -
 ///   For converting *to* relative units,
 ///   the absolute length in px to which the output value will refer.
 ///   Defaults to the same as `$from-context`, since it is rarely needed.
 @function convert-units(
   $length,
   $to-unit,
-  $from-context: $_BROWSER-DEFAULT-FONT-SIZE,
+  $from-context: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE,
   $to-context: $from-context
 ) {
   $_convertable: ('in', 'mm', 'cm', 'pt', 'pc', 'px', 'em', 'rem', '%', 'ex');
@@ -97,12 +97,12 @@
 
   // Special conversion for browser-default ems (needed in media-queries)
   @if ($to-unit == 'browser-ems') {
-    $size: size($length, 'px');
+    $size: convert-units($length, 'px', $from-context);
     @return $size / $_BROWSER-DEFAULT-FONT-SIZE * 1em;
   }
 
-  // Optimize for cases where `from` and `to` units are accidentally the same.
-  @if $from-unit == $to-unit {
+  // No conversion needed
+  @if ($from-unit == $to-unit) {
     @return $length;
   }
 

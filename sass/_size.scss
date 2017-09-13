@@ -9,7 +9,7 @@
 ///
 /// @group sizes
 ///
-/// @param {String | Length | List} $size -
+/// @param {string | length | list} $size -
 ///   The name of a size in your configuration (e.g. `line-height`),
 ///   or a length to be converted into different units (e.g. `24px`),
 ///   or a base-size and adjustments to be made
@@ -19,11 +19,11 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {String} $unit [null] -
+/// @param {string} $unit [null] -
 ///   The desired units for the output (e.g. `px` or `rem`).
 /// @throw -
 ///   The calculated value is not a valid CSS length.
-/// @return {Length} -
+/// @return {length} -
 ///   The calculated length, in the requested units.
 @function size(
   $size,
@@ -43,7 +43,7 @@
 
   @if (not $calc) and ($adjust-type == 'map') {
     @each $key, $value in $adjust {
-      $size: _ac-scale-adjust-size($size, $key, $value);
+      $size: _ac-scale-adjust-size($size, $key, $value...);
     }
   } @else if $calc and ($adjust-type == 'list') {
     $values: ();
@@ -73,7 +73,7 @@
 ///
 /// @group sizes
 ///
-/// @param {String | Length | List} $size -
+/// @param {string | length | list} $size -
 ///   The name of a size in your configuration (e.g. `line-height`),
 ///   or a length to be converted into different units (e.g. `24px`),
 ///   or a base-size and adjustments to be made
@@ -81,9 +81,9 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {String} $unit [null] -
+/// @param {string} $unit [null] -
 ///   The desired units for the output (e.g. `px` or `rem`).
-/// @return {Length} -
+/// @return {length} -
 ///   The calculated negative length, in the requested units.
 @function negative(
   $size,
@@ -101,9 +101,9 @@
 ///
 /// @group sizes
 ///
-/// @param {String | Number} $ratio -
+/// @param {string | number} $ratio -
 ///   The key-name or value of a ratio
-/// @return {Number} -
+/// @return {number} -
 ///   The numeric value of a ratio
 /// @example scss
 ///   /* Octave: #{ratio('octave')} */
@@ -129,7 +129,7 @@
 ///
 /// @group sizes
 ///
-/// @param {String | Length | List} $size -
+/// @param {string | length | list} $size -
 ///   The name of a size in your configuration (e.g. `line-height`),
 ///   or a length to be converted into different units (e.g. `24px`),
 ///   or a base-size and adjustments to be made
@@ -137,7 +137,7 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {String} $unit [null] -
+/// @param {string} $unit [null] -
 ///   The desired units for the output (e.g. `px` or `rem`).
 /// @output -
 ///   Equal CSS height and width properties,
@@ -161,25 +161,26 @@
 ///
 /// @access private
 ///
-/// @param {Number} $size -
+/// @param {number} $size -
 ///   The original size to perform adjusments on
-/// @param {String | Number} $key -
+/// @param {string | number} $key -
 ///   The adjustment to perform,
 ///   given as either a numeric ratio,
 ///   named ratio keyword,
 ///   or function name to call.
-/// @param {Any} $value -
-///   Any required adjustment arguments,
+/// @param {arglist} $value… -
+///   Any required arguments,
 ///   such as the number of times to apply a ratio,
-///   or additional arguments to be passed to a function.
-/// @return {Number} -
+///   or additional information to be passed to a function.
+/// @return {number} -
 ///   Results of the adjustment.
 @function _ac-scale-adjust-size(
   $size,
   $key,
-  $value
+  $value...
 ) {
   $ratio: ratio($key);
+  $value: if(length($value) == 1, nth($value, 1), $value);
 
   @if $ratio == 'linear' {
     @return $size * $value;
@@ -188,7 +189,7 @@
     @return $size * $multiplier;
   } @else if (type-of($key) == 'function') or function-exists($key) {
     $function: _ac-scale-get-function($key);
-    $args: if($value, ($size, $value), $size);
+    $args: if($value, join($size, $value), $size);
     @return call($function, $args...);
   }
 

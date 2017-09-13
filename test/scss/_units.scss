@@ -4,24 +4,26 @@
 
 // Get Number
 // ----------
-@include test-module('get-number [function]') {
-  @include test('Absolute') {
+@include describe('get-number [function]') {
+  @include it('Absolute') {
     @include assert-equal(
       _get-number('px'),
-      0px);
+      0px
+    );
   }
 
-  @include test('Not Absolute') {
+  @include it('Not Absolute') {
     @include assert-false(_get-number('ch'));
   }
 
-  @include test('Relative') {
+  @include it('Relative') {
     @include assert-equal(
       _get-number('ch', 'relative'),
-      0ch);
+      0ch
+    );
   }
 
-  @include test('Not Known') {
+  @include it('Not Known') {
     @include assert-false(_get-number('wtf'));
   }
 }
@@ -29,89 +31,104 @@
 
 // Convert Length
 // --------------
-@include test-module('convert-units [function]') {
+@include describe('convert-units [function]') {
   $old-scale: $sizes;
-  $sizes: map-merge($sizes, ('root': 20px)) !global;
 
-  @include test('Converts px size to browser em size') {
+  @include it('Converts px size to browser em size') {
     @include assert-equal(
       convert-units(24px, 'browser-ems'),
-      1.5em,
-      'Convert px to root browser ems');
+      1.5em
+    );
   }
 
-  @include test('Converts rem size to browser em size') {
+  @include it('Converts rem size to browser em size') {
     @include assert-equal(
       convert-units(2rem, 'browser-ems'),
-      2.5em,
-      'Convert rem to root browser ems');
+      2.5em
+    );
   }
 
-  $sizes: $old-scale !global;
-
-  @include test('No conversion for equal units') {
+  @include it('No conversion for equal units') {
     @include assert-equal(
       convert-units(6em, 'em'),
-      6em);
+      6em
+    );
   }
 
-  @include test('Convert px to em') {
+  @include it('Convert px to em') {
     @include assert-equal(
-      convert-units(16px, 'em'),
-      1em);
+      convert-units(30px, 'em'),
+      1.5em
+    );
   }
 
-  @include test('Convert px to %') {
+  @include it('Convert px to %') {
     @include assert-equal(
       convert-units(16px, '%', $to-context: 1600px),
-      1%);
+      1%
+    );
   }
 
-  @include test('Convert em to %') {
+  @include it('Convert em to %') {
     @include assert-equal(
       convert-units(1.35em, '%', $to-context: 600px),
-      3.6%);
+      4.5%
+    );
   }
 
-  @include test('Convert px to ex') {
+  @include it('Convert px to ex') {
     @include assert-equal(
-      convert-units(16px, 'ex'),
-      2ex);
+      convert-units(30px, 'ex'),
+      3ex
+    );
   }
 
-  @include test('Convert % to px') {
+  @include it('Convert % to px') {
     @include assert-equal(
       convert-units(150%, 'px', 18px),
-      27px);
+      27px
+    );
   }
 
-  @include test('Convert px to rem') {
+  @include it('Convert px to rem') {
     @include assert-equal(
       convert-units(1px, 'rem'),
-      0.0625rem);
+      0.05rem
+    );
   }
 
-  @include test('Convert em to mm') {
+  @include it('Convert em to mm') {
     @include assert-equal(
       convert-units(2em, 'mm', 18px),
-      9.525mm);
+      9.525mm
+    );
   }
 
-  @include test('Convert rem to px') {
+  @include it('Convert rem to px') {
     @include assert-equal(
       convert-units(1rem, 'px'),
-      16px);
+      20px
+    );
   }
 
-  @include test('Convert to nothing') {
+  @include it('Convert to nothing') {
     @include assert-equal(
       convert-units(16vw, ''),
-      16);
+      16
+    );
   }
 
-  @include test('Convert nothing to vw') {
+  @include it('Convert nothing to vw') {
     @include assert-equal(
       convert-units(16, 'vw'),
-      16vw);
+      16vw
+    );
+  }
+
+  @include it('Convert em to browser-em') {
+    @include assert-equal(
+      convert-units(2em, 'browser-ems', $from-context: 20px),
+      2.5em
+    );
   }
 }

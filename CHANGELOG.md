@@ -1,13 +1,22 @@
 Accoutrement-Scale Changelog
 ============================
 
+
+5.0.0 - 09/13/17
+----------------
+- BREAKING: `$from-context` defaults to 'root' when available
+- BUGFIX: Browser-em math requires `$from-context`
+
+
 4.0.2 - 09/13/17
 ----------------
 - Recompile styleguide documentation.
 
+
 4.0.1 - 09/13/17
 ----------------
 - Publish missing styleguide documentation.
+
 
 4.0.0 - 09/12/17
 ----------------

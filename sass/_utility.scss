@@ -20,10 +20,10 @@ $_LOCAL-FUNCTIONS: (
 ///
 /// @access private
 ///
-/// @param {String | Function} $function -
+/// @param {string | function} $function -
 ///   The name (string) of a function,
 ///   or the function to be called.
-/// @return {String | Function} -
+/// @return {string | function} -
 ///   Returns a first-class function in Sass 3.5+,
 ///   or the function name string in older Sass versions.
 @function _ac-scale-get-function(

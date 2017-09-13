@@ -4,91 +4,105 @@
 
 // Plus/Add
 // --------
-@include test-module('plus/add [functions]') {
-  @include test('Numbers') {
+@include describe('plus/add [functions]') {
+  @include it('Numbers') {
     @include assert-equal(
       size('add-number'),
-      7em);
+      7em
+    );
 
     @include assert-equal(
       size('plus-number'),
-      414px);
+      414px
+    );
   }
 
-  @include test('Names') {
+  @include it('Names') {
     @include assert-equal(
       size('add-name'),
-      18px);
+      22px
+    );
 
     @include assert-equal(
       size('plus-name'),
-      18px);
+      22px
+    );
   }
 }
 
 
 // Minus/Subtract
 // --------------
-@include test-module('minus/subtract [functions]') {
-  @include test('Numbers') {
+@include describe('minus/subtract [functions]') {
+  @include it('Numbers') {
     @include assert-equal(
       size('minus-number'),
-      2em);
+      2em
+    );
 
     @include assert-equal(
       size('subtract-number'),
-      6px);
+      6px
+    );
   }
 
-  @include test('Names') {
+  @include it('Names') {
     @include assert-equal(
       size('subtract-name'),
-      14px);
+      18px
+    );
 
     @include assert-equal(
       size('minus-name'),
-      14px);
+      18px
+    );
   }
 }
 
 
 // Times/Multiply
 // --------------
-@include test-module('times/multiply [functions]') {
-  @include test('Numbers') {
+@include describe('times/multiply [functions]') {
+  @include it('Numbers') {
     @include assert-equal(
       size('times-number'),
-      3em);
+      3em
+    );
 
     @include assert-equal(
       size('multiply-number'),
-      37.5px);
+      37.5px
+    );
   }
 
-  @include test('Names') {
+  @include it('Names') {
     @include assert-equal(
       size('multiply-name'),
-      32px);
+      40px
+    );
 
     @include assert-equal(
       size('times-name'),
-      32px);
+      40px
+    );
   }
 }
 
 
 // Divide
 // ------
-@include test-module('divide [functions]') {
-  @include test('Numbers') {
+@include describe('divide [functions]') {
+  @include it('Numbers') {
     @include assert-equal(
       size('divide-number'),
-      1.5em);
+      1.5em
+    );
   }
 
-  @include test('Names') {
+  @include it('Names') {
     @include assert-equal(
       size('divide-name'),
-      8px);
+      10px
+    );
   }
 }

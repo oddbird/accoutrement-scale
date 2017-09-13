@@ -58,7 +58,7 @@ $ratios: () !default;
 // -----
 /// Defined a palette of common sizes to be used across your project,
 /// in the format "name: size" or "name: basis (ratio/function: value)".
-/// If your map includes a value for `root`,
+/// If your map includes a `px`-comparable value for `root`,
 /// it will be used in relative-size unit conversions.
 ///
 /// @group config

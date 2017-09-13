@@ -18,11 +18,11 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 ///
 /// @access private
 ///
-/// @param {Number} $base –
+/// @param {number} $base –
 ///   The base number
-/// @param {Number} $exp -
+/// @param {number} $exp -
 ///   The exponent to which to raise base
-/// @return {Number}
+/// @return {number}
 /// @example scss
 ///   /* #{ _acs-pow(4, 2)   } */
 ///   /* #{ _acs-pow(4, -2)  } */
@@ -76,8 +76,8 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 ///
 /// @access private
 ///
-/// @param {Number} $x
-/// @param {Number} $b The base number
+/// @param {number} $x
+/// @param {number} $b the base number
 /// @example scss
 ///   /* #{ _acs-log(2)     } */
 ///   /* #{ _acs-log(10)    } */
@@ -125,8 +125,8 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 ///
 /// @access private
 ///
-/// @param {Number} $x
-/// @return {List} fraction, exponent
+/// @param {number} $x
+/// @return {list} fraction, exponent
 @function _acs-frexp(
   $x
 ) {
@@ -153,8 +153,8 @@ $_SQRT2: 1.4142135623730951; // sass-lint:disable-line variable-name-format
 ///
 /// @access private
 ///
-/// @param {Number} $x
-/// @param {Number} $exp
+/// @param {number} $x
+/// @param {number} $exp
 @function _acs-ldexp(
   $x,
   $exp
