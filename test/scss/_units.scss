@@ -32,8 +32,6 @@
 // Convert Length
 // --------------
 @include describe('convert-units [function]') {
-  $old-scale: $sizes;
-
   @include it('Converts px size to browser em size') {
     @include assert-equal(
       convert-units(24px, 'browser-ems'),
@@ -129,6 +127,13 @@
     @include assert-equal(
       convert-units(2em, 'browser-ems', $from-context: 20px),
       2.5em
+    );
+  }
+
+  @include it('Convert a named size based on named context') {
+    @include assert-equal(
+      convert-units('rhythm', 'browser-ems', 'root'),
+      1.875em
     );
   }
 }

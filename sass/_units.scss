@@ -72,17 +72,17 @@
 ///
 /// @group units
 ///
-/// @param {number} $length -
-///   The length to be converted
+/// @param {length | string} $length -
+///   The length or named size to be converted.
 /// @param {string} $to-unit -
 ///   The desired units to convert to.
 ///   Some units (`ch`, `vw`, `vh`, `vmin`, `vmax`) cannot be converted.
-/// @param {number} $from-context ['root' setting or 16px] -
+/// @param {length | string} $from-context ['root' setting or 16px] -
 ///   When converting from relative units,
 ///   the absolute length (in px) to which $length refers -
 ///   e.g. for `$lengths` in em units, would normally be the
 ///   font-size of the current element.
-/// @param {number} $to-context [$from-context] -
+/// @param {length | string} $to-context [$from-context] -
 ///   For converting *to* relative units,
 ///   the absolute length in px to which the output value will refer.
 ///   Defaults to the same as `$from-context`, since it is rarely needed.
@@ -93,6 +93,11 @@
   $to-context: $from-context
 ) {
   $_convertable: ('in', 'mm', 'cm', 'pt', 'pc', 'px', 'em', 'rem', '%', 'ex');
+
+  $length: _ac-scale-get-size($length);
+  $from-context: _ac-scale-get-size($from-context);
+  $to-context: _ac-scale-get-size($to-context);
+
   $from-unit: unit($length);
 
   // Special conversion for browser-default ems (needed in media-queries)
@@ -129,6 +134,8 @@
 
   // Establish relative context
   $root-size: map-get($sizes, 'root') or $_BROWSER-DEFAULT-FONT-SIZE;
+  $root-size: _ac-scale-get-size($root-size);
+  $root-size: _get-px($root-size);
   $from-context: _get-px($from-context);
   $to-context: _get-px($to-context);
 

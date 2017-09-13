@@ -18,7 +18,13 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 /// Use the `$ratios` variable to add your own ratios,
 /// or aliases for built-in ratios.
 ///
+/// Don't make changes to this map directly.
+/// You can add your own named ratios in the `$ratios` map.
+///
 /// @group config
+/// @access public
+/// @see $ratios
+///
 /// @type map
 $_DEFAULT-RATIOS: (
   'octave': 2,
@@ -40,10 +46,13 @@ $_DEFAULT-RATIOS: (
 // Ratios
 // ------
 /// Define your own ratios,
-/// or aliases for built-in ratios.
+/// or alias keys for built-in ratios.
+/// Any ratios that resolve to `linear`
+/// will not use any exponential scale.
 ///
 /// @group config
 /// @type map
+/// @see $_DEFAULT-RATIOS
 ///
 /// @example scss -
 ///   $ratios: (

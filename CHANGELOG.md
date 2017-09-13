@@ -8,6 +8,8 @@ Accoutrement-Scale Changelog
 - BUGFIX: Browser-em math requires `$from-context`
 - NEW: Allow `size()` function to accept additional arguments
   (e.g. `$from-context` and `$to-context`) for unit-conversion.
+- NEW: Allow `convert-units` function to accept named sizes
+  for all length values.
 
 
 4.0.2 - 09/13/17
