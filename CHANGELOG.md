@@ -2,6 +2,11 @@ Accoutrement-Scale Changelog
 ============================
 
 
+5.0.1 - 09/13/17
+----------------
+- BUGFIX: `negative` and `square` functions handle units properly
+
+
 5.0.0 - 09/13/17
 ----------------
 - BREAKING: `$from-context` defaults to 'root' when available

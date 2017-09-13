@@ -19,7 +19,7 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {vararg} $unit -
+/// @param {vararg} $unit... -
 ///   The desired unit for the output (e.g. `px` or `rem`),
 ///   and any other arguments required for the conversion.
 /// @return {length} -
@@ -50,15 +50,16 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {string} $unit [null] -
-///   The desired units for the output (e.g. `px` or `rem`).
+/// @param {vararg} $unit... -
+///   The desired unit for the output (e.g. `px` or `rem`),
+///   and any other arguments required for the conversion.
 /// @return {length} -
 ///   The calculated negative length, in the requested units.
 @function negative(
   $size,
-  $unit: null
+  $unit...
 ) {
-  @return 0 - size($size, $unit);
+  @return 0 - size($size, $unit...);
 }
 
 
@@ -106,16 +107,17 @@
 ///   For the sake of consistent documentation,
 ///   I recommend keeping adjustments in the configuration
 ///   whenever possible.
-/// @param {string} $unit [null] -
-///   The desired units for the output (e.g. `px` or `rem`).
+/// @param {vararg} $unit... -
+///   The desired unit for the output (e.g. `px` or `rem`),
+///   and any other arguments required for the conversion.
 /// @output -
 ///   Equal CSS height and width properties,
 ///   set to the given size and units.
 @mixin square(
   $size,
-  $unit: null
+  $unit...
 ) {
-  $size: size($size, $unit);
+  $size: size($size, $unit...);
 
   height: $size;
   width: $size;

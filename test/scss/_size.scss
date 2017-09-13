@@ -147,6 +147,13 @@
       0 - size('rhythm')
     );
   }
+
+  @include it('Get negative size with unit conversion') {
+    @include assert-equal(
+      negative('rhythm', 'px'),
+      -30px
+    );
+  }
 }
 
 
