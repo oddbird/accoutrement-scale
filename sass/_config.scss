@@ -28,17 +28,17 @@ $_BROWSER-DEFAULT-FONT-SIZE: 16px;
 /// @type map
 $_DEFAULT-RATIOS: (
   'octave': 2,
-  'major-seventh': 15 / 8,
-  'minor-seventh': 16 / 9,
-  'major-sixth': 5 / 3,
-  'minor-sixth': 8 / 5,
-  'fifth': 3 / 2,
-  'augmented-fourth': 45 / 32,
-  'fourth': 4 / 3,
-  'major-third': 5 / 4,
-  'minor-third': 6 / 5,
-  'major-second': 9 / 8,
-  'minor-second': 16 / 15,
+  'major-seventh': (15 / 8),
+  'minor-seventh': (16 / 9),
+  'major-sixth': (5 / 3),
+  'minor-sixth': (8 / 5),
+  'fifth': (3 / 2),
+  'augmented-fourth': (45 / 32),
+  'fourth': (4 / 3),
+  'major-third': (5 / 4),
+  'minor-third': (6 / 5),
+  'major-second': (9 / 8),
+  'minor-second': (16 / 15),
   'multiple': 'linear',
 );
 
@@ -56,7 +56,7 @@ $_DEFAULT-RATIOS: (
 ///
 /// @example scss -
 ///   $ratios: (
-///     'line-height': 1 / 3,
+///     'line-height': (1 / 3),
 ///     'headings': 'linear',
 ///     'golden': 1.61803399,
 ///   );

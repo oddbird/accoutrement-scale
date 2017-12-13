@@ -2,6 +2,11 @@ Accoutrement-Scale Changelog
 ============================
 
 
+5.0.2 - 12/13/17
+----------------
+- BUGFIX: Fix implicit division in map values
+
+
 5.0.1 - 09/13/17
 ----------------
 - BUGFIX: `negative` and `square` functions handle units properly
