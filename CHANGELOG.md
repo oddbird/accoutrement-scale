@@ -2,8 +2,8 @@ Accoutrement-Scale Changelog
 ============================
 
 
-6.0.0 - UNRELEASED
-------------------
+6.0.0 - 04/03/18
+----------------
 - BREAKING: Remove all non-essential default sizes
 - BUGFIX: Add `convert-units` to local (pre-captured) functions
 - NEW: `negative` function can be used with `calc()` values,
