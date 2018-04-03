@@ -1,5 +1,6 @@
 {
   "name": "accoutrement-scale",
+  "title": "Accoutrement: Scale",
   "version": "5.0.2",
   "description": "Size and scale helpers for typography and layout.",
   "homepage": "http://oddbird.net/accoutrement-scale/",
@@ -16,7 +17,7 @@
     "mocha": "^3.5.0",
     "sass-true": "^3.0.0",
     "sassdoc": "^2.3.0",
-    "sassdoc-theme-herman": "^1.0.0-alpha.9"
+    "sassdoc-theme-herman": "^2.1.0"
   },
   "author": "Miriam Suzanne <miriam@oddbird.net>",
   "license": "MIT",

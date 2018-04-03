@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <title>Accoutrement: Scale Documentation</title>
+  <title>Changelog | Accoutrement: Scale Documentation</title>
 
   <link href="assets/img/favicon.ico" rel="shortcut icon">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,600|Source+Sans+Pro:400,400i,700,700i" rel="stylesheet">
@@ -57,7 +57,7 @@
     <div class="nav-subsection">
       <h3 class="nav-home">
         
-        <a href="index.html" data-nav="is-active">Accoutrement: Scale</a>
+        <a href="index.html" data-nav="is-not-active">Accoutrement: Scale</a>
       </h3>
 
       
@@ -66,7 +66,7 @@
           
             
             <li class="nav-item">
-              <a href="CHANGELOG.html" data-nav="is-not-active">Changelog</a>
+              <a href="CHANGELOG.html" data-nav="is-active">Changelog</a>
             </li>
           
             
@@ -169,100 +169,104 @@
 
       <main data-region="main">
         
+  <nav class="breadcrumb">
+    
+    <a href="index.html" >Accoutrement: Scale</a> »
+    <strong>Changelog</strong>
+  </nav>
 
-        <div data-page="index">
+
+        <div data-page="CHANGELOG">
           
-  
-  
-    <ul class="project-links">
-      
-        <li class="project-link-item">
-          <a href="http://oddbird.net/accoutrement-scale/" class="project-link">View Project</a>
-        </li>
-      
-      
-        <li class="project-link-item">
-          <a href="https://github.com/oddbird/accoutrement-scale.git" class="project-link">View Source</a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="text-block">
-      <h1 id="accoutrement-scale">accoutrement-scale</h1>
-<p>Sass size &amp; scale management tools
-by <a href="http://oddbird.net/">OddBird</a>.
-Gather all your sizes into a single map,
-generate new sizes based on <a href="http://www.modularscale.com/">modular scales</a>
-or arbitrary functions,
-and access them by<span class="widont">&nbsp;</span>name.</p>
-<h2 id="more-accoutrement-tools">More Accoutrement Tools</h2>
+  <div class="text-block">
+    <h1 id="accoutrement-scale-changelog">Accoutrement-Scale Changelog</h1>
+<h2 id="6-0-0-unreleased">6.0.0 - UNRELEASED</h2>
 <ul>
-<li><a href="http://oddbird.net/accoutrement-init/">Init</a>
-provides light-weight<span class="widont">&nbsp;</span>browser-normalization.</li>
-<li><a href="http://oddbird.net/accoutrement-color/">Color</a>
-provides color-palette management and contrast-ratio<span class="widont">&nbsp;</span>utilities.</li>
-<li><a href="http://oddbird.net/accoutrement-type/">Type</a>
-provides webfont management tools,
-and other typography<span class="widont">&nbsp;</span>helpers.</li>
-<li><a href="http://oddbird.net/accoutrement-layout/">Layout</a>
-provides layout utilities such as
-box-sizing, intrinsic ratios, z-index management,
-named media-queries, and a<span class="widont">&nbsp;</span>clearfix.</li>
+<li>BREAKING: Remove all non-essential default<span class="widont">&nbsp;</span>sizes</li>
+<li>BUGFIX: Add <code>convert-units</code> to local (pre-captured)<span class="widont">&nbsp;</span>functions</li>
+<li>NEW: <code>negative</code> function can be used with <code>calc()</code> values,
+returning <code>calc(-1 * (&lt;value&gt;))</code></li>
+<li>NEW: <code>$functions</code> map allows you to name/capture first-class functions
+in the latest versions of Sass, and call them by name in the <code>$sizes</code> map</li>
+<li>NEW: <code>add-sizes</code> &amp; <code>add-ratios</code> functions can be used
+to merge partial maps into the global <code>$sizes</code>/<code>$ratios</code> maps</li>
 </ul>
-<h2 id="quick-start">Quick Start</h2>
-<p>Install the package with npm or<span class="widont">&nbsp;</span>yarn:</p>
-<pre><code class="lang-bash">npm install accoutrement-scale
-yarn add accoutrement-scale
-</code></pre>
-<p>Import the library:</p>
-<pre><code class="lang-scss">@import '&lt;path-to&gt;/accoutrement-scale/sass/scale';
-</code></pre>
-<p>Establish your palette of ratios (modular scales) and<span class="widont">&nbsp;</span>sizes:</p>
-<pre><code class="lang-scss">$ratios: (
-  'my-ratio': 1.25,
-);
+<h2 id="5-0-2-12-13-17">5.0.2 - 12/13/17</h2>
+<ul>
+<li>BUGFIX: Fix implicit division in map<span class="widont">&nbsp;</span>values</li>
+</ul>
+<h2 id="5-0-1-09-13-17">5.0.1 - 09/13/17</h2>
+<ul>
+<li>BUGFIX: <code>negative</code> and <code>square</code> functions handle units<span class="widont">&nbsp;</span>properly</li>
+</ul>
+<h2 id="5-0-0-09-13-17">5.0.0 - 09/13/17</h2>
+<ul>
+<li>BREAKING: <code>$from-context</code> defaults to ‘root’ when<span class="widont">&nbsp;</span>available</li>
+<li>BUGFIX: Browser-em math requires <code>$from-context</code></li>
+<li>NEW: Allow <code>size()</code> function to accept additional arguments
+(e.g. <code>$from-context</code> and <code>$to-context</code>) for unit-conversion.</li>
+<li>NEW: Allow <code>convert-units</code> function to accept named sizes
+for all length<span class="widont">&nbsp;</span>values.</li>
+</ul>
+<h2 id="4-0-2-09-13-17">4.0.2 - 09/13/17</h2>
+<ul>
+<li>Recompile styleguide documentation.</li>
+</ul>
+<h2 id="4-0-1-09-13-17">4.0.1 - 09/13/17</h2>
+<ul>
+<li>Publish missing styleguide<span class="widont">&nbsp;</span>documentation.</li>
+</ul>
+<h2 id="4-0-0-09-12-17">4.0.0 - 09/12/17</h2>
+<p><em>Same as 4.0.0-alpha-1 -<span class="widont">&nbsp;</span>09/06/17</em></p>
+<ul>
+<li>BREAKING: Remove overly-opinionated baseline type tools
+including <code>font-size</code> and <code>baseline</code> mixins.
+These settings are more clear when established explicitly in<span class="widont">&nbsp;</span>CSS</li>
+<li>BREAKING: Rename <code>scale()</code> =&gt; <code>ratio()</code> to avoid conflicts with<span class="widont">&nbsp;</span>CSS</li>
+<li>BREAKING: Remove stand-alone <code>browser-ems()</code> function…</li>
+<li>NEW: Allow <code>browser-ems</code> as a <code>$to-unit</code> argument
+in the <code>contert-units()</code> function.</li>
+<li>NEW: Add (private) <code>pow()</code> functions,
+so that MathSass is no longer a dependency for non-integer<span class="widont">&nbsp;</span>steps</li>
+</ul>
+<h2 id="3-2-0-08-23-17">3.2.0 - 08/23/17</h2>
+<ul>
+<li>NEW: Rename private <code>_get-ratio()</code> to public <code>scale()</code>
+for consistent access to ratios with map-key<span class="widont">&nbsp;</span>references.</li>
+</ul>
+<h2 id="3-1-1-05-27-17">3.1.1 - 05/27/17</h2>
+<ul>
+<li>BUGFIX: Resolve problems with referencing <code>calc()</code> values</li>
+</ul>
+<h2 id="3-1-0-05-20-17">3.1.0 - 05/20/17</h2>
+<ul>
+<li>Allow <code>calc()</code> values in scale<span class="widont">&nbsp;</span>maps</li>
+<li>Add <code>calc(%s + %s) ('root', 'rhythm')</code> syntax
+for building custom calc functions based on other map<span class="widont">&nbsp;</span>values</li>
+<li>Support single-argument adjustment functions
+by passing <code>null</code> to the arglist,
+e.g. <code>'size-name': 10rem / 3 ('round': null)</code></li>
+<li>Include basic math functions:
+<code>add</code>/<code>plus</code>, <code>minus</code>/<code>subtract</code>, <code>times</code>/<code>multiply</code>, and <code>divide</code> –
+for use in scale maps, e.g. <code>'new-size': 'size1' ('add': 'size2')</code></li>
+<li>Fix <code>safe-get-function</code> to expect first-class functions
+from external sources, and get local<span class="widont">&nbsp;</span>ones</li>
+</ul>
+<h2 id="3-0-0-03-08-17">3.0.0 - 03/08/17</h2>
+<ul>
+<li>BREAKING: Don’t convert units unless specifically requested.
+This allows you to define preferred units per-item
+in the configuration<span class="widont">&nbsp;</span>map.</li>
+<li>BREAKING: Remove <code>$default-units</code> setting. See<span class="widont">&nbsp;</span>above.</li>
+<li>Allow arbitrary adjustment functions
+in the <code>$sizes</code> map,
+e.g. <code>'my-size': 24px ('add': 12px)</code>,
+where <code>add</code> is an available function
+that will accept <code>24px, 12px</code> as arguments.</li>
+<li>Support first-class functions in Sass<span class="widont">&nbsp;</span>3.5.</li>
+</ul>
 
-$sizes: (
-  // define explicit values
-  'root': 24px,
-  'icons': 1em,
-  'page': 8in,
-
-  // reference existing sizes
-  'text': 'root'
-
-  // apply adjustments and conversions
-  // using named-ratios or arbitrary functions
-  'rhythm': 'root' ('fifth': 1, 'convert-units': 'rem'),
-
-  'h1': 'root' ('my-ratio': 3),
-  'h2': 'root' ('my-ratio': 2),
-  'h3': 'root' ('my-ratio': 1),
-
-  // define calc() output based on existing sizes
-  'viewport-relative': calc(%s + %s) ('root', 2vw),
-);
-</code></pre>
-<p>Access your named sizes using the <code>size()</code> function,
-and even convert-units<span class="widont">&nbsp;</span>on-the-fly:</p>
-<pre><code class="lang-scss">.example {
-  font-size('text');
-  width: size('page', 'px');
-}
-</code></pre>
-<p>We can only calculate integer steps along an exponential modular scale,
-but if you want more power,
-install <a href="https://github.com/terkel/mathsass">MathSass</a>,
-and we’ll let them do the hard<span class="widont">&nbsp;</span>math.</p>
-<pre><code class="lang-scss">$sizes: (
-  'complex': 'root' ('my-scale': 1.25),
-);
-</code></pre>
-
-    </div>
-  
+  </div>
 
         </div>
       </main>

@@ -1,5 +1,5 @@
-// Base API
-// ========
+/// # Accessing Sizes
+/// @group sizes
 
 
 // Size [function]
@@ -37,7 +37,7 @@
 
 // Negative [function]
 // -------------------
-/// Return the negative value of any length,
+/// Return the inverse value of any length,
 /// in comparable units.
 ///
 /// @group sizes
@@ -59,11 +59,19 @@
   $size,
   $unit...
 ) {
-  @return 0 - size($size, $unit...);
+  $size: size($size, $unit...);
+
+  @if (type-of($size) == 'string') {
+    $size: _ac-str-replace($size, 'calc(', 'calc(-1 * (');
+    $size: str-slice($size, 1, -2) + '))';
+    @return $size;
+  }
+
+  @return -1 * size($size, $unit...);
 }
 
 
-// Scale [function]
+// Ratio [function]
 // ----------------
 /// Retrieve a scale ratio by name
 /// from either the `$_DEFAULT-RATIOS`
@@ -213,18 +221,14 @@
   $ratio: ratio($key);
   $value: if(length($value) == 1, nth($value, 1), $value);
 
-  @if $ratio == 'linear' {
+  @if ($ratio == 'linear') {
     @return $size * $value;
   } @else if (type-of($ratio) == 'number') {
     $multiplier: _acs-pow($ratio, $value);
     @return $size * $multiplier;
-  } @else if (type-of($key) == 'function') or function-exists($key) {
-    $function: _ac-scale-get-function($key);
-    $args: if($value, join($size, $value), $size);
-    @return call($function, $args...);
   }
 
-  @error '#{$key} is not a valid ratio or function for adusting sizes.';
+  $function: _ac-scale-get-function($key);
+  $args: if($value, join($size, $value), $size);
+  @return call($function, $args...);
 }
-
-

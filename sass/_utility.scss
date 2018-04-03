@@ -1,13 +1,6 @@
 // Utilities
 // =========
 
-$_LOCAL-FUNCTIONS: (
-  'add', 'plus',
-  'minus', 'subtract',
-  'times', 'multiply',
-  'divide'
-);
-
 
 // Get Function
 // ------------
@@ -17,8 +10,12 @@ $_LOCAL-FUNCTIONS: (
 /// This is safe to use internally,
 /// as it allows users to pass in
 /// either a string, or a previously-captured function.
+/// Users can also add captured functions
+/// to the provided `$functions` map
+/// in order to call them by name.
 ///
 /// @access private
+/// @see $functions
 ///
 /// @param {string | function} $function -
 ///   The name (string) of a function,
@@ -35,9 +32,14 @@ $_LOCAL-FUNCTIONS: (
     @return $function;
   }
 
-  @if ($type == 'string') and function-exists('get-function') {
-    @if index($_LOCAL-FUNCTIONS, $function) {
+  @if function-exists('get-function') {
+    @if index($_LOCAL-SCALE-FUNCTIONS, $function) {
       @return get-function($function);
+    }
+
+    @if map-has-key($functions, $function) {
+      $function: map-get($functions, $function);
+      @return _ac-scale-get-function($function);
     }
 
     @error '[#{$type}] `#{$function}` must be a first-class function';

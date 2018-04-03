@@ -2,6 +2,18 @@ Accoutrement-Scale Changelog
 ============================
 
 
+6.0.0 - UNRELEASED
+------------------
+- BREAKING: Remove all non-essential default sizes
+- BUGFIX: Add `convert-units` to local (pre-captured) functions
+- NEW: `negative` function can be used with `calc()` values,
+  returning `calc(-1 * (<value>))`
+- NEW: `$functions` map allows you to name/capture first-class functions
+  in the latest versions of Sass, and call them by name in the `$sizes` map
+- NEW: `add-sizes` & `add-ratios` functions can be used
+  to merge partial maps into the global `$sizes`/`$ratios` maps
+
+
 5.0.2 - 12/13/17
 ----------------
 - BUGFIX: Fix implicit division in map values

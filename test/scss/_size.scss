@@ -154,6 +154,13 @@
       -30px
     );
   }
+
+  @include it('Generates a negative calc size') {
+    @include assert-equal(
+      negative('calc-ref'),
+      calc(-1 * (60px + 2vw / 3))
+    );
+  }
 }
 
 
