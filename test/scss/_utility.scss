@@ -5,27 +5,27 @@
 // Get Function
 // ------------
 @include describe('Get Function [function]') {
-  $test: _ac-scale-get-function('size');
+  $test: _ac-scale-get-function('times');
 
   @include it('Returns a function or function-name') {
     @include assert-equal(
       $test,
-      'size'
+      if(function-exists('get-function'), get-function('times'), 'times')
     );
   }
 
   @include it('Returned function or name is callable') {
     @include assert-equal(
-      call($test, 'root'),
-      size('root')
+      call($test, 'root', 2),
+      size('root') * 2
     );
   }
 
   @if function-exists('get-function') {
     @include it('Functions are returned without change') {
       @include assert-equal(
-        _ac-scale-get-function('size'),
-        get-function('size')
+        _ac-scale-get-function('times'),
+        get-function('times')
       );
     }
   }
