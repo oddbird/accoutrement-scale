@@ -9,6 +9,7 @@
 
 // Config
 $ratios: ('new': 'octave');
+$functions: ('round': get-function('round'));
 
 $test-sizes: (
   'root': 20px,
