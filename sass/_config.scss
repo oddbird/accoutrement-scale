@@ -67,7 +67,7 @@ $ratios: () !default;
 
 // Sizes
 // -----
-/// Defined a palette of common sizes to be used across your project,
+/// Define a palette of common sizes to be used across your project,
 /// in the format "name: size" or "name: basis (ratio/function: value)".
 /// If your map includes a `px`-comparable value for `root`,
 /// it will be used in relative-size unit conversions.
@@ -134,7 +134,7 @@ $_LOCAL-SCALE-FUNCTIONS: (
 
 // Functions
 // ---------
-/// Defines any additional math functions required
+/// Define any additional math functions required
 /// to generate relataionships in the `$sizes` map.
 /// This is only necessary for newer versions of Sass,
 /// where functions are first-class,
