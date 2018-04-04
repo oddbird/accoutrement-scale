@@ -7,9 +7,12 @@
 @import '../../sass/scale';
 
 
+@if function-exists('get-function') {
+  $functions: ('round': get-function('round')) !global;
+}
+
 // Config
 $ratios: ('new': 'octave');
-$functions: ('round': get-function('round'));
 
 $test-sizes: (
   'root': 20px,

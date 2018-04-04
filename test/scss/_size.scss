@@ -190,6 +190,8 @@
   @return $size + $add;
 }
 
+$_plus-test-function: if(function-exists('get-function'), get-function('_plus-test-function'), '_plus-test-function');
+
 
 // Adjust Size [function]
 // ----------------------
@@ -224,7 +226,7 @@
 
   @include it('Arbitrary adjustment') {
     @include assert-equal(
-      _ac-scale-adjust-size(24px, get-function('_plus-test-function'), 2px),
+      _ac-scale-adjust-size(24px, $_plus-test-function, 2px),
       24px + 2px
     );
   }
